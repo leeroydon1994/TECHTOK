@@ -1,0 +1,109 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+}
+
+.signup-wrapper {
+  font-family: "Source Sans Pro", sans-serif;
+  color: #43425d;
+  font-weight: 300;
+  width: 100%;
+  height: 100%;
+
+  background-image: url("signUp-image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 35vw center;
+
+  height: 100vh;
+
+  text-align: center;
+}
+
+.signup-wrapper form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+  padding: 0 100px;
+  width: 50vw;
+  height: 100vh;
+}
+
+.signup-text-box h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 0.5rem;
+}
+
+.signup-text-box p {
+  color: #4d4f5c;
+  font-size: 1.1rem;
+}
+
+.signup-form-control {
+  margin-bottom: 1.5rem;
+}
+
+.signup-text-box {
+  margin-bottom: 5em;
+}
+
+.signup-text-box h1,
+.signup-text-box p {
+  margin-bottom: 1rem;
+}
+
+.signup-wrapper form Input {
+  width: 20rem;
+  border-radius: 3px;
+  font-family: "Source Sans Pro", sans-serif;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: left;
+}
+
+.signup-wrapper span.MuiButton-label {
+  font-size: 1rem;
+  /* color: white; */
+  font-weight: 400;
+}
+
+.signup-wrapper form Input::placeholder {
+  text-align: left;
+}
+
+.signup-wrapper form .MuiInput-underline::before {
+  border-bottom: 2px solid #e9e9f0;
+}
+
+.signup-wrapper form .MuiInput-underline::after {
+  border-bottom: 2px solid #43425d;
+}
+
+.signup-button-signup-page {
+  background-color: #43425d !important;
+}
+
+.login-button-signup-page {
+  background-color: #fff !important;
+  color: #43425d !important;
+  border: 1px solid #43425d !important;
+}
+
+.signup-wrapper .btn-primary {
+  appearance: none;
+  outline: 0;
+  border: 0;
+  padding: 10px 15px;
+  width: 20rem;
+  margin-bottom: 2.5rem;
+}
+
+.signup-button-box {
+  margin-top: 1.5rem;
+}

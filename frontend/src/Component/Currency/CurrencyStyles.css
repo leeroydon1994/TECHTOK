@@ -1,0 +1,156 @@
+/* #currencyh1 {
+  margin-right: 450px;
+  margin-top: 30px;
+  padding: 0.5em;
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: 500;
+} */
+
+#base-amount {
+  border: 2px solid #2e2b2b83;
+  background-color: rgba(252, 252, 252, 0.2);
+  border-radius: 3px;
+  /* font-family: "Source Sans Pro", sans-serif; */
+  display: block;
+  text-align: center;
+  color: #0f0f0f;
+  margin-top: 5px;
+  text-align: center;
+  font-size: 1rem;
+  height: 2rem;
+}
+
+/* #form-container {
+  margin: 2em auto;
+  padding: 0 auto;
+  width: 60%;
+  margin-top: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#currency-container {
+  padding: 0 auto;
+  background: #c2c2c2;
+  border-radius: 8px;
+  box-shadow: 3px 5px 45px black;
+  margin-left: 280px;
+  width: 1000px;
+} */
+
+#result-text {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.ui .mini .form {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-end;
+}
+
+/* #currencyiwant {
+  margin-left: 80px;
+} */
+
+h3 {
+  font-size: 1rem;
+}
+
+/* #currencyamount {
+  margin-right: 80px;
+} */
+
+#result-text {
+  border: 2px solid #2e2b2b83;
+  background-color: rgba(252, 252, 252, 0.2);
+  border-radius: 3px;
+  /* font-family: "Source Sans Pro", sans-serif; */
+  color: #0f0f0f;
+  width: 400px;
+  margin: auto 0;
+  text-align: center;
+}
+
+/* #result {
+  font-weight: 500;
+  margin-top: 1px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+} */
+
+/* --- */
+
+.currency-wrapper {
+  width: 75vw;
+  margin: 50px auto;
+}
+
+.index-quote {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #0f0f0f;
+}
+
+.index-quote .right-element {
+  display: flex;
+}
+
+.index-quote .chart-title {
+  margin-left: 3rem;
+  position: relative;
+  width: 15rem;
+}
+
+.index-chart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.index-quote .chart-title > div {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.chart {
+  margin: 0 auto;
+}
+
+.index-quote .chart-main h2 {
+  margin-left: 1rem;
+}
+.index-quote .chart-main h1 {
+  margin-bottom: 0.5rem;
+}
+
+#currency-chart-name {
+  margin-bottom: 2rem;
+}
+
+.currency-wrapper > h1 {
+  font-weight: 800;
+}
+
+.chart-options {
+  display: block;
+  width: 100px;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  width: 1000px;
+  margin: 1rem auto;
+}

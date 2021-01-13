@@ -1,0 +1,116 @@
+.body {
+  background-color: rgb(240, 240, 247);
+}
+
+.dashboard-active-stocks {
+  width: 1fr;
+
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  padding-left: 30px;
+  padding-top: 30px;
+  border: 3px solid rgb(255, 255, 255);
+}
+.dashboard-stocks-container h2 {
+  font-weight: 600;
+}
+
+.dashboard-laggard-stocks {
+  width: 1fr;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  padding-left: 30px;
+  padding-top: 30px;
+  border: 3px solid rgb(255, 255, 255);
+}
+
+.dashboard-leader-stocks {
+  width: 1fr;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  padding-left: 30px;
+  padding-top: 30px;
+  border: 3px solid rgb(255, 255, 255);
+}
+
+.stock-info-head {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* ----- */
+
+.dashboard-wrapper {
+  width: 75%;
+  margin: 50px auto;
+}
+
+.dashboard-index-quote {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #0f0f0f;
+}
+
+.dashboard-index-quote .right-element {
+  display: flex;
+}
+
+.dashboard-index-quote .chart-title {
+  margin-left: 3rem;
+  position: relative;
+  width: 15rem;
+}
+
+.dashboard-index-chart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.dashboard-index-quote .dashboard-chart-title > div {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.chart {
+  margin: 0 auto;
+}
+
+.dashboard-index-quote .chart-main h2 {
+  margin-left: 1rem;
+}
+.dashboard-index-quote .chart-main h1 {
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-wrapper > h1 {
+  font-weight: 800;
+}
+
+.dashboard-index-chart-container .dashboard-chart-options {
+  display: block;
+  width: 100px;
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.dashboard-stocks {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem auto;
+}
+
+.dashboard-active-stocks,
+.dashboard-laggard-stocks {
+  margin-right: 1rem;
+}
+
+.dashboard-wrapper .stock-info-head h1 {
+  margin-bottom: 1rem;
+}
