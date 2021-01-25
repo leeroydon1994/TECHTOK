@@ -1,14 +1,16 @@
 .nasdaq100-wrapper {
-  padding: 0 300px;
   background-color: rgb(240, 240, 247);
+  width: 90vw;
+  margin: 2rem auto;
 }
 
 .stocks-list {
   padding: 25px 0;
-  color: black;
+  color: #2b2b2b;
+  background-color: rgb(240, 240, 247);
 }
 
-.stock-table {
+/* .stock-table {
   width: 100%;
   max-width: 1600px;
 }
@@ -20,41 +22,39 @@
 .head {
   font-weight: 800;
   padding: 5px 15px;
-  text-align: center;
+  text-align: left;
 }
 
 .head1 {
   width: 300px;
   padding: 15px;
-  text-align: center;
-}
+  text-align: left;
+} */
 
 .nasdaq100-headline1 {
-  position: relative;
+  /* position: relative;
   top: 50px;
-  right: 10px;
-  font-size: 2.5rem;
-  font-weight: 600;
+  right: 10px; */
+  font-weight: 800;
+  margin: 3rem 0;
 }
 
 .nasdaq100-stocks-list {
-  position: relative;
+  /* position: relative;
   top: 100px;
-  right: 170px;
-  width: 1700px;
-  background-color: rgb(255, 255, 255);
-  padding: 20px;
-  border: 3px solid rgb(255, 255, 255);
+  right: 170px; */
+  width: 100%;
+  padding: 1.5rem;
 }
 
 .Nasdaq100-stock-info-head {
-  position: relative;
-  font-weight: 600;
+  /* position: relative; */
+  font-weight: 500;
   font-size: 1.2rem;
   padding: 10px;
-  left: 5px;
+  /* left: 5px; */
 }
 
 .Nasdaq100-stock-info {
-  padding: 15px;
+  padding: 10px;
 }

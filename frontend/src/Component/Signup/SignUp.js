@@ -1,11 +1,12 @@
 import React from "react";
 import "./signupstyle.css";
 import { connect } from "react-redux";
-import { Button, Input } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 // import { withRouter } from 'react-router-dom';
-import {
-  signupUserThunk /*signupUserFatchThunk*/,
-} from "../../Redux/Signup/actions";
+import { signupUserThunk /*signupUserFatchThunk*/ } from "../../Redux/Signup/actions";
+import { Input } from "reactstrap";
+
+import { withRouter } from "react-router";
 
 export class SignUp extends React.Component {
   constructor(props) {
@@ -41,6 +42,7 @@ export class SignUp extends React.Component {
       password: "",
       passwordConfirmation: "",
     });
+    this.props.history.push("/login");
   }
 
   render() {
@@ -52,8 +54,7 @@ export class SignUp extends React.Component {
               <h1>TECHTOK</h1>
 
               <p>
-                “In any sector, trade the leading stock – the one showing the
-                strongest trend”
+                “In any sector, trade the leading stock – the one showing the <em>strongest</em> trend”
               </p>
               <cite>- Jesse Livermore</cite>
             </div>
@@ -120,7 +121,6 @@ export class SignUp extends React.Component {
 
               <div className="form-group">
                 <Button
-                  type="submit"
                   className="btn btn-primary btn-lg login-button-signup-page"
                   variant="contained"
                   size="large"
@@ -152,4 +152,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUp));

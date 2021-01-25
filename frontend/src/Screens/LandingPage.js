@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import NavBar from "../Component/Navbar/Navbar";
 import { connect } from "react-redux";
 
@@ -58,7 +53,7 @@ export default class LandingPage extends React.Component {
           <NavBar isAuthenticated={this.props.isAuthenticated} />
           <Switch>
             {/* <PrivateRoute exact path="/" component={HomePage} /> */}
-            <PrivateRoute exact path="/dashboard" component={DashboardPage} />
+            <PrivateRoute exact path="/" component={DashboardPage} />
             <PrivateRoute exact path="/nasdaq100" component={Nasdaq100Page} />
             <PrivateRoute exact path="/ratings" component={RatingsPage} />
             <PrivateRoute exact path="/favorites" component={FavouritePage} />

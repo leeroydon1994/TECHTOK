@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const knexFile = require("../knexfile")["development"];
+const knexFile = require("../knexfile")[process.env.NODE_ENV || "development"];
 const knex = require("knex")(knexFile);
 
 // For all methods, return the stock array back to frontend
@@ -18,29 +18,40 @@ async function getStockArray(decoded, res) {
   let stockArray = [];
   console.log("GET");
 
-  // Find the stocks' ids registered with a particular user
-  let stockIds = await knex("user_stock").select("stock_id").where("user_id", decoded.id);
+  // Find the stocks' ids and tags registered with a particular user
+  let stockIds = await knex("user_stock").select("stock_id", "tag_id").where("user_id", decoded.id);
   console.log(stockIds, "P");
 
   // Convert the ids into symbols
-  let changeIdToSymbols = stockIds.map(async (stockId) => {
-    let symbols = await knex("stocks").select("symbol").where("stocks.id", stockId.stock_id);
-    stockArray.push(symbols);
-  });
+  for (let stockId of stockIds) {
+    let symbol = await knex("stocks").select("symbol").where("stocks.id", stockId.stock_id).returning("symbol");
+    console.log(symbol, "SINGLE SYMBOL");
+    stockArray.push(symbol);
+  }
 
   // Send the symbols back to frontend
-  Promise.all(changeIdToSymbols).then(() => {
-    console.log(stockArray, "Q");
-    res.send(stockArray);
+  console.log(stockArray, "Q");
+  let symbolsTagsArray = stockArray.map((element, i) => {
+    console.log(element, "SYMBOL (FAVE)");
+    console.log(stockIds[i]["tag_id"]);
+    return { ...element[0], tag_id: stockIds[i]["tag_id"] };
   });
+  console.log(symbolsTagsArray, "QD");
+  res.send(symbolsTagsArray);
 }
 
-//GET
+//GET (FAVE+TAGS)
 exports.getFave = async function (req, res) {
   let token = req.headers.authorization.split(" ")[1];
-  console.log(token);
-  let decoded = jwt.verify(token, config.jwtSecret);
-  console.log(decoded);
+  console.log(token, "TOKEN GET");
+
+  let decodedObject = jwt.verify(token, config.jwtSecret);
+  // Deep clone the decoded object
+  let deepClone = JSON.parse(JSON.stringify(decodedObject));
+  // Convert decoded user name into user id
+  let tableUserId = await knex("users").select("id").where("name", deepClone.name);
+  let decoded = Object.assign(deepClone, { id: tableUserId[0].id });
+  console.log(decoded, "DECODED");
 
   getStockArray(decoded, res);
 };
@@ -48,9 +59,15 @@ exports.getFave = async function (req, res) {
 // POST
 exports.postFave = async function (req, res) {
   let token = req.headers.authorization.split(" ")[1];
-  console.log(token);
-  let decoded = jwt.verify(token, config.jwtSecret);
-  console.log(decoded);
+  console.log(token, "TOKEN POST");
+
+  let decodedObject = jwt.verify(token, config.jwtSecret);
+  // Deep clone the decoded object
+  let deepClone = JSON.parse(JSON.stringify(decodedObject));
+  // Convert decoded user name into user id
+  let tableUserId = await knex("users").select("id").where("name", deepClone.name);
+  let decoded = Object.assign(deepClone, { id: tableUserId[0].id });
+  console.log(decoded, "DECODED");
 
   let { company, symbol } = req.body;
   console.log("POST", company, symbol);
@@ -95,9 +112,15 @@ exports.postFave = async function (req, res) {
 // DELETE
 exports.deleteFave = async function (req, res) {
   let token = req.headers.authorization.split(" ")[1];
-  console.log(token);
-  let decoded = jwt.verify(token, config.jwtSecret);
-  console.log(decoded);
+  console.log(token, "TOKEN DEL");
+
+  let decodedObject = jwt.verify(token, config.jwtSecret);
+  // Deep clone the decoded object
+  let deepClone = JSON.parse(JSON.stringify(decodedObject));
+  // Convert decoded user name into user id
+  let tableUserId = await knex("users").select("id").where("name", deepClone.name);
+  let decoded = Object.assign(deepClone, { id: tableUserId[0].id });
+  console.log(decoded, "DECODED");
 
   // Find the stock's id
   let idQuery = await knex("stocks").select("id").where("symbol", req.params.symbol);

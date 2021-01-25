@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function stockDescriptionNasdaq100() {
+export default function stockDescriptionFave() {
   return (
     <tr className="stock-row">
       <th className="stock-info-head head1">Name</th>
@@ -14,7 +14,8 @@ export default function stockDescriptionNasdaq100() {
       <th className="stock-info-head head ">52-week High</th>
       <th className="stock-info-head head ">52-week Low</th>
       <th className="stock-info-head head ">52-week Change %</th>
-      <th className="stock-info-head">Fave</th>
+      <th className="stock-info-head head2">Fave</th>
+      <th className="stock-info-head head2">Tags</th>
     </tr>
   );
 }

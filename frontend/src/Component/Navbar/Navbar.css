@@ -4,6 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: 0.25s;
 }
 
 .menu-bars {
@@ -14,6 +15,7 @@
 
 .menu-bars > svg {
   vertical-align: middle;
+  transform: translateY(-0.1rem);
 }
 
 .logoutbutton {
@@ -46,7 +48,7 @@
   align-items: center;
   /* padding: 8px 0px 8px 16px; */
   list-style: none;
-  height: 60px;
+  height: 4.5rem;
 }
 
 .nav-text a {
@@ -57,9 +59,12 @@
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 1.5rem;
   border-radius: 4px;
 }
+
+/* .nav-text span {
+} */
 
 .nav-text a:hover {
   background-color: #36364b;
@@ -81,10 +86,11 @@
 }
 
 .navbar-toggle h1 {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: #f5f5f5;
-  margin-left: -0.1rem;
+  margin-left: 0.2rem;
+  margin-bottom: 0 !important;
 }
 
 .nav-menu span {
@@ -95,16 +101,34 @@
   font-weight: 600;
 }
 
+.right-elements > p {
+  color: #f5f5f5;
+  font-size: 1rem;
+  letter-spacing: 0.02rem;
+  font-weight: 500;
+  margin-right: 3rem;
+  margin-bottom: 0 !important;
+}
+
+.right-elements > p > span {
+  font-weight: 800;
+}
+
+.right-elements {
+  display: flex;
+  align-items: center;
+}
+
 .footer {
   color: #f5f5f5;
   position: absolute;
-  bottom: 50px;
+  bottom: 1rem;
   width: 100%;
   text-align: center;
 }
 
 .footer p {
-  font-size: 14px;
+  font-size: 10px;
   transform: translateX(-0.5rem);
 }
 

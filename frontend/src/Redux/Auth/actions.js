@@ -27,20 +27,17 @@ export function loginUserThunk(email, password) {
         if (response.data == null) {
           dispatch(loginFailureActionCreator("Unknown Error, no Response.."));
         } else if (!response.data.token) {
-          dispatch(
-            loginFailureActionCreator(
-              response.data.message || "No Token generated"
-            )
-          );
+          dispatch(loginFailureActionCreator(response.data.message || "No Token generated"));
         } else {
           localStorage.setItem("token", response.data.token);
+          localStorage.setItem("userName", response.data.userName);
+
           dispatch(loginSuccessActionCreator());
         }
       })
       .catch((err) => console.log("Error: " + err));
   };
 }
-
 
 /* logout */
 export const LOGOUT_NOW_ACTION = "LOGOUT_NOW_ACTION";
@@ -54,10 +51,10 @@ export function logoutSuccessActionCreator() {
 export function logoutNowThunk() {
   return (dispatch) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userName");
     dispatch(logoutSuccessActionCreator());
   };
 }
-
 
 /* Facebook Login */
 export function loginFacebookThunk(userInfo) {
@@ -79,6 +76,8 @@ export function loginFacebookThunk(userInfo) {
         } else {
           // If login was successful, set the token in local storage
           localStorage.setItem("token", response.data.token);
+          localStorage.setItem("userName", response.data.userName);
+
           // Dispatch the success action
           dispatch(loginSuccessActionCreator());
         }

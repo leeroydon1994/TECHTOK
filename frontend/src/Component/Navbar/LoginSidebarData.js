@@ -15,7 +15,7 @@ export const LoginSidebarData = [
   // },
   {
     title: "Dashboard",
-    path: "/dashboard",
+    path: "/",
     icon: <IoIcons.IoIosPaper />,
     cName: "nav-text",
   },

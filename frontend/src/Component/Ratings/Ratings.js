@@ -118,14 +118,10 @@ export class StockAPI extends React.Component {
         });
 
         console.log(symbolCountObj);
-        let sortedSymbolArray = Object.entries(symbolCountObj).sort(
-          (a, b) => b[1] - a[1]
-        );
+        let sortedSymbolArray = Object.entries(symbolCountObj).sort((a, b) => b[1] - a[1]);
         console.log(sortedSymbolArray);
 
-        let ratingsSymbol = sortedSymbolArray
-          .map((item) => item[0])
-          .slice(0, 20);
+        let ratingsSymbol = sortedSymbolArray.map((item) => item[0]).slice(0, 20);
         console.log(ratingsSymbol.toString());
 
         this.callStockAPI(ratingsSymbol.toString());
@@ -144,7 +140,7 @@ export class StockAPI extends React.Component {
         console.log(stock["symbol"]);
         console.log(res.data);
 
-        if (res.data.some((row) => row[0].symbol === stock["symbol"])) {
+        if (res.data.some((row) => row.symbol === stock["symbol"])) {
           console.log("Change button for " + stock["symbol"] + "!");
           this.changeDeleteButtonStyle(stock["symbol"]);
           // this.addedFavoriteBoolean(stock["symbol"]);
@@ -168,12 +164,12 @@ export class StockAPI extends React.Component {
         },
         {
           headers: { Authorization: `Bearer ${this.user}` },
-        }
+        },
       )
       .then((res) => {
         console.log(res.data);
 
-        if (res.data.some((row) => row[0].symbol === stock["symbol"])) {
+        if (res.data.some((row) => row.symbol === stock["symbol"])) {
           this.changeDeleteButtonStyle(stock["symbol"]);
           console.log(stock["symbol"] + "is added to the favorite list.");
           // this.addedFavoriteBoolean(stock["symbol"]);
@@ -188,15 +184,12 @@ export class StockAPI extends React.Component {
     console.log(stock["name"], stock["symbol"]);
 
     axios
-      .delete(
-        `${process.env.REACT_APP_API_SERVER}/api/stock/${stock["symbol"]}`,
-        {
-          headers: { Authorization: `Bearer ${this.user}` },
-        }
-      )
+      .delete(`${process.env.REACT_APP_API_SERVER}/api/stock/${stock["symbol"]}`, {
+        headers: { Authorization: `Bearer ${this.user}` },
+      })
       .then((res) => {
         console.log(res.data);
-        if (res.data.some((row) => row[0].symbol !== stock["symbol"])) {
+        if (res.data.some((row) => row.symbol !== stock["symbol"])) {
           this.changeAddButtonStyle(stock["symbol"]);
           // this.beforeFavoriteBoolean(stock["symbol"]);
           console.log(stock["symbol"] + "is deleted from the favorite list.");
@@ -216,7 +209,7 @@ export class StockAPI extends React.Component {
         <div className="top-20-list">
           <div className="ratings-list-stocks-list1">
             <div className="ratings-container stocks-container">
-              <Table className="ratings-table stock-table">
+              <Table striped className="ratings-table stock-table">
                 <thead>{StockDescriptionFull()}</thead>
                 <tbody>
                   <StockTable

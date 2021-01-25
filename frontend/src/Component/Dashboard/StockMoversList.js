@@ -24,13 +24,12 @@ export default class StockAPI extends React.Component {
   }
 
   callStockAPI() {
-    const api =
-      "https://bloomberg-market-and-financial-news.p.rapidapi.com/market/get-movers?id=ndx%3Aind";
+    const api = "https://bloomberg-market-and-financial-news.p.rapidapi.com/market/get-movers?id=ndx%3Aind";
 
     fetch(api, {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "c5229bbaa3msha0459ecc4c76fddp1e4f7cjsncfff12e01a59",
+        "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY,
         "x-rapidapi-host": "bloomberg-market-and-financial-news.p.rapidapi.com",
       },
     })
@@ -51,8 +50,6 @@ export default class StockAPI extends React.Component {
   }
 
   render() {
-    // const
-
     const { activeStocks, laggardStocks, leaderStocks } = this.state;
 
     return (
@@ -63,11 +60,7 @@ export default class StockAPI extends React.Component {
             <Table striped className="stock-table">
               <thead>{StockDescriptionShort()}</thead>
               <tbody>
-                <StockTableShort
-                  api={this.callStockAPI}
-                  group="active"
-                  type={activeStocks}
-                />
+                <StockTableShort group="active" type={activeStocks} />
               </tbody>
             </Table>
           </div>
@@ -78,12 +71,7 @@ export default class StockAPI extends React.Component {
             <Table striped className="stock-table">
               <thead>{StockDescriptionShort()}</thead>
               <tbody>
-                <StockTableShort
-                  api={this.callStockAPI}
-                  full={false}
-                  group="laggard"
-                  type={laggardStocks}
-                />
+                <StockTableShort group="laggard" type={laggardStocks} />
               </tbody>
             </Table>
           </div>
@@ -94,19 +82,13 @@ export default class StockAPI extends React.Component {
             <Table striped className="stock-table">
               <thead>{StockDescriptionShort()}</thead>
               <tbody>
-                <StockTableShort
-                  api={this.callStockAPI}
-                  group="leader"
-                  type={leaderStocks}
-                />
+                <StockTableShort group="leader" type={leaderStocks} />
               </tbody>
             </Table>
           </div>
         </div>
 
-        <div className="button stock-refresh-button">
-          {/* <Button onClick={this.callStockAPI}>Refresh</Button> */}
-        </div>
+        <div className="button stock-refresh-button">{/* <Button onClick={this.callStockAPI}>Refresh</Button> */}</div>
       </>
     );
   }

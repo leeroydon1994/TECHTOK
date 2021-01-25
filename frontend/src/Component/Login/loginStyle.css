@@ -12,7 +12,7 @@
   width: 100%;
   height: 100%;
 
-  background-image: url("./signIn-Image.jpg");
+  background-image: url("../../Images/signIn-Image.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -125,4 +125,9 @@
 
 .login-button-box .fa {
   padding-right: 0.5rem;
+}
+
+.kep-login-facebook {
+  display: none !important;
+  /* Further research for the facebook login code and deployment on AWS and Heroku */
 }

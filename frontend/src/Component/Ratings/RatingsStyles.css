@@ -1,17 +1,17 @@
 .ratings-headline12 {
-  position: relative;
-  left: 200px;
-  top: 50px;
-  font-weight: 600;
-  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 3rem 0;
 }
 
 .ratings-list-stocks-list1 {
-  position: relative;
-  top: 100px;
-  right: -130px;
-  width: 1700px;
-  background-color: rgb(255, 255, 255);
-  padding: 20px;
-  border: 3px solid rgb(255, 255, 255);
+  width: 100%;
+  padding: 1.5rem;
 }
+
+.ratings-wrapper {
+  background-color: rgb(240, 240, 247);
+  width: 90vw;
+  margin: 2rem auto;
+}
+
+/* Share table css properties with Nasdaq100 */

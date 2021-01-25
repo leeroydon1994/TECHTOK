@@ -1,14 +1,10 @@
 .news-wrapper {
-  padding: 0 300px;
+  width: 90vw;
+  margin: 2rem auto;
 }
 .news-title1 {
-  position: relative;
-
   font-weight: 600;
   font-size: 2.5rem;
-  margin-left: 30px;
-  top: -170px;
-  left: 220px;
 }
 
 .news-summary {
@@ -19,76 +15,62 @@
   width: 1000px;
 }
 .news-results-container {
-  position: absolute;
-  top: 280px;
-  left: 80px;
+  margin-top: 2rem;
 }
 
-.news-thumbnail-image {
-  max-width: 500px;
-  max-height: 300px;
+.news-thumbnail {
+  width: 20rem;
+  height: 15rem;
+  object-fit: cover;
 }
 
 .news-text-box {
   color: #0f0f0f;
+  margin: 0 4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.news-text {
-  position: relative;
-  top: 30px;
+.news-info {
+  text-align: end;
 }
 
 .news-box {
-  padding: 10px;
+  padding: 1.5rem 0;
   display: flex;
   justify-content: flex-start;
 }
 
 .news-searchbar {
-  position: relative;
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 30px;
-  margin-top: 35px;
+  margin: 2rem 0;
 }
 
-.news-searchbar-form > input {
-  position: absolute;
+.news-searchbar-form > Input {
   width: 700px;
   height: 60px;
-  top: 80px;
-  left: -1px;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 400;
   text-indent: 15px;
   text-align: left;
 }
 
 .news-title {
-  margin-left: 70px;
-  margin-top: -30px;
   font-weight: 700;
 }
 
 .news-provider {
-  margin-left: 70px;
-  margin-top: 10px;
   font-size: 1rem;
 }
 
 .news-summary {
-  margin-left: 70px;
-  margin-top: 20px;
   font-weight: 400;
   font-size: 1.3rem;
 }
 
 .published-time {
-  position: relative;
-  margin-left: 70px;
-  margin-top: 80px;
 }
 
-h1 {
-  margin-left: 10px;
+.news-wrapper > h1 {
+  font-weight: 800;
 }

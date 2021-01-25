@@ -1,5 +1,6 @@
 import {
   ADD_BLOG_ACTION_CREATOR,
+  SEARCH_BLOG_ACTION_CREATOR,
   LIST_BLOGS_ACTION_CREATOR,
   DELETE_BLOG_ACTION_CREATOR,
   EDIT_BLOG_ACTION_CREATOR,
@@ -32,28 +33,37 @@ export function blogReducer(state = inititalState, action) {
   // console.log(action);
   switch (action.type) {
     case LIST_BLOGS_ACTION_CREATOR:
+      console.log(action.payload, "list");
+      return {
+        blogList: action.payload,
+      };
+    case SEARCH_BLOG_ACTION_CREATOR:
+      console.log(state.blogList, "search-list");
       return {
         blogList: action.payload,
       };
     case ADD_BLOG_ACTION_CREATOR:
       let array = [...state.blogList];
       array.push(action.payload);
-      console.log(array);
-      console.log(action.payload);
+      console.log(array, "ARRAY");
+      console.log(action.payload, "ADD, PAYLOAD");
       return {
         blogList: array,
       };
     case DELETE_BLOG_ACTION_CREATOR:
-      console.log(state.blogList);
-      console.log(action.payload);
+      // console.log(state.blogList);
+      // console.log(action.payload);
       let array2 = state.blogList.filter((blog) => blog.id !== action.payload);
-      console.log(array2);
+      // console.log(array2);
       return {
         blogList: array2,
       };
     case EDIT_BLOG_ACTION_CREATOR:
+      console.log("hihihihihihihih");
+      console.log(state);
       return {
-        blogList: action.payload,
+        ...state,
+        done: action.payload,
       };
     default:
       return state;

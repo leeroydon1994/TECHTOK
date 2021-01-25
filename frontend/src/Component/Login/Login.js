@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import { loginUserThunk, loginFacebookThunk } from "../../Redux/Auth/actions";
 import "./loginStyle.css";
 import FacebookLogin from "react-facebook-login";
+import { withRouter } from "react-router";
 
-import { Button, Input } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import { Input } from "reactstrap";
 
 export class PureLogin extends React.Component {
   constructor(props) {
@@ -26,6 +28,9 @@ export class PureLogin extends React.Component {
   };
   login = () => {
     this.props.loginRedux(this.state.email, this.state.password);
+    if (this.props.isAuthenticated) {
+      this.props.history.push("/");
+    }
   };
 
   componentClick() {
@@ -39,8 +44,6 @@ export class PureLogin extends React.Component {
     return null;
   };
 
-  responseLoginIn = () => {};
-
   render() {
     return (
       <div className="login-wrapper">
@@ -49,8 +52,9 @@ export class PureLogin extends React.Component {
             <div className="login-text-box">
               <h1>TECHTOK</h1>
               <p>
-                "Whatever happens in the stock market today has happened before
-                and will happen again.”
+                "Whatever happens in the stock market <em>today</em> has happened <em>before</em> and will happen{" "}
+                <em>again</em>
+                .”
               </p>
               <cite>- Jesse Livermore</cite>
             </div>
@@ -61,6 +65,7 @@ export class PureLogin extends React.Component {
                 value={this.state.email}
                 className="form-control"
                 placeholder="Email Address"
+                autoComplete="email"
                 inputProps={{ "aria-label": "description" }}
               />
             </div>
@@ -73,6 +78,7 @@ export class PureLogin extends React.Component {
                 value={this.state.password}
                 className="form-control"
                 placeholder="Password"
+                autoComplete="current-password"
                 inputProps={{ "aria-label": "description" }}
               />
             </div>
@@ -87,6 +93,7 @@ export class PureLogin extends React.Component {
                   variant="contained"
                   size="large"
                   color="primary"
+                  href="/"
                 >
                   Login
                 </Button>
@@ -142,4 +149,4 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(PureLogin);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PureLogin));

@@ -16,10 +16,6 @@ export default class StockTable extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   stockBoolean: [],
-    // };
-
     this.user = localStorage.getItem("token");
 
     this.getFaveData = this.getFaveData.bind(this);
@@ -27,51 +23,8 @@ export default class StockTable extends React.Component {
     this.deleteFaveData = this.deleteFaveData.bind(this);
   }
 
-  // Button switch
-  // beforeFavoriteBoolean(symbol) {
-  //   // Search if the stock name is inside the state
-  //   console.log(this.state.stockBoolean);
-  //   if (this.state.stockBoolean.some((item) => item.symbol === symbol)) {
-  //     let newStockBoolean = this.state.stockBoolean.slice();
-  //     newStockBoolean[this.state.stockBoolean.findIndex((element) => element.stock === symbol)] = {
-  //       symbol: symbol,
-  //       boolean: true,
-  //     };
-  //     console.log(newStockBoolean);
-  //     this.setState({ stockBoolean: newStockBoolean });
-  //   } else {
-  //     // If the stock name is yet to be registered
-  //     this.setState({
-  //       stockBoolean: [...this.state.stockBoolean, { symbol: symbol, boolean: true }],
-  //     });
-  //   }
-  // }
-
-  // addedFavoriteBoolean(symbol) {
-  //   // Search if the stock name is inside the state
-  //   if (this.state.stockBoolean.some((item) => item.stock === symbol)) {
-  //     let newStockBoolean = this.state.stockBoolean.slice();
-  //     newStockBoolean[this.state.stockBoolean.findIndex((element) => element.stock === symbol)] = {
-  //       stock: symbol,
-  //       boolean: false,
-  //     };
-  //     console.log(newStockBoolean);
-
-  //     this.setState({ stockBoolean: newStockBoolean });
-  //   } else {
-  //     // If the stock name is yet to be registered
-  //     this.setState({
-  //       stockBoolean: [...this.state.stockBoolean, { symbol: symbol, boolean: false }],
-  //     });
-  //   }
-  // }
-
-  //----
-
   // Change the color of the button
   changeDeleteButtonStyle(symbol) {
-    // let buttonAdd = document.getElementById(`${symbol}-${id}-${type}-add`);
-    // let buttonDelete = document.getElementById(`${symbol}-${id}-${type}-delete`);
     let buttonAdd = document.getElementsByClassName(`${symbol}-add`);
     let buttonDelete = document.getElementsByClassName(`${symbol}-delete`);
 
@@ -113,15 +66,13 @@ export default class StockTable extends React.Component {
       })
       .then((res) => {
         console.log(stock["symbol"]);
-        console.log(res.data);
+        console.log(res.data, "YYYY");
 
-        if (res.data.some((row) => row[0].symbol === stock["symbol"])) {
+        if (res.data.some((row) => row.symbol === stock["symbol"])) {
           console.log("Change button for " + stock["symbol"] + "!");
           this.changeDeleteButtonStyle(stock["symbol"]);
-          // this.addedFavoriteBoolean(stock["symbol"]);
         } else {
           console.log("Not to change the button for " + stock["symbol"] + "!");
-          // this.beforeFavoriteBoolean(stock["symbol"]);
         }
       })
       .catch((err) => console.log(err));
@@ -139,15 +90,14 @@ export default class StockTable extends React.Component {
         },
         {
           headers: { Authorization: `Bearer ${this.user}` },
-        }
+        },
       )
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data, "QQQQ");
 
-        if (res.data.some((row) => row[0].symbol === stock["symbol"])) {
+        if (res.data.some((row) => row.symbol === stock["symbol"])) {
           this.changeDeleteButtonStyle(stock["symbol"]);
           console.log(stock["symbol"] + "is added to the favorite list.");
-          // this.addedFavoriteBoolean(stock["symbol"]);
         }
       })
       .catch((err) => {
@@ -159,17 +109,16 @@ export default class StockTable extends React.Component {
     console.log(stock["name"], stock["symbol"]);
 
     axios
-      .delete(
-        `${process.env.REACT_APP_API_SERVER}/api/stock/${stock["symbol"]}`,
-        {
-          headers: { Authorization: `Bearer ${this.user}` },
-        }
-      )
+      .delete(`${process.env.REACT_APP_API_SERVER}/api/stock/${stock["symbol"]}`, {
+        headers: { Authorization: `Bearer ${this.user}` },
+      })
       .then((res) => {
         console.log(res.data);
-        if (res.data.some((row) => row[0].symbol !== stock["symbol"])) {
+        if (res.data.some((row) => row.symbol !== stock["symbol"])) {
           this.changeAddButtonStyle(stock["symbol"]);
-          // this.beforeFavoriteBoolean(stock["symbol"]);
+          console.log(stock["symbol"] + "is deleted from the favorite list.");
+        } else if (res.data.length === 0) {
+          this.changeAddButtonStyle(stock["symbol"]);
           console.log(stock["symbol"] + "is deleted from the favorite list.");
         }
       })
@@ -180,26 +129,16 @@ export default class StockTable extends React.Component {
 
   render() {
     return this.props.type.map((stock) => (
-      <tr
-        className="stock-row"
-        key={this.props.type.indexOf(stock)}
-        onLoad={this.getFaveData(stock)}
-      >
+      <tr className="stock-row" key={this.props.type.indexOf(stock)} onLoad={this.getFaveData(stock)}>
         {/* {Separate the table data to be inserted as different components} */}
-        {this.props.group === "nasdaq" ? (
-          <StockInfoFull stock={stock} />
-        ) : (
-          <StockInfoShort stock={stock} />
-        )}
+        {this.props.group === "nasdaq" ? <StockInfoFull stock={stock} /> : <StockInfoShort stock={stock} />}
         {/* {Determine the type of button by the state of the stock} */}
 
         <td>
           <Button
             variant="contained"
             color="primary"
-            id={`${stock["symbol"]}-${this.props.type.indexOf(stock)}-${
-              this.props.group
-            }-add`}
+            id={`${stock["symbol"]}-${this.props.type.indexOf(stock)}-${this.props.group}-add`}
             onClick={() => {
               this.addFaveData(stock);
             }}
@@ -212,9 +151,7 @@ export default class StockTable extends React.Component {
           <Button
             variant="contained"
             color="default"
-            id={`${stock["symbol"]}-${this.props.type.indexOf(stock)}-${
-              this.props.group
-            }-delete`}
+            id={`${stock["symbol"]}-${this.props.type.indexOf(stock)}-${this.props.group}-delete`}
             onClick={() => this.deleteFaveData(stock)}
             className={`${stock["symbol"]}-delete`}
             style={{ display: "none" }}
@@ -226,42 +163,3 @@ export default class StockTable extends React.Component {
     ));
   }
 }
-
-//   return type.map((stock) => (
-//     <tr className="stock-row" key={type.indexOf(stock)}>
-//       <td className="stock-info">{stock["name"]}</td>
-//       <td className="stock-info">{stock["symbol"]}</td>
-//       <td className="stock-info">{stock["last"]}</td>
-//       <td className="stock-info">{stock["netChange"]}</td>
-//       <td className="stock-info">{stock["pctChange"] + "%"}</td>
-//       <td>
-//         <Button
-//           variant="contained"
-//           color="primary"
-//           id={`${stock["symbol"]}-add`}
-//           onLoad={getFaveData(stock)}
-//           onClick={() => {
-//             addFaveData(stock);
-//           }}
-//           className="add-fave"
-//           style={{ display: "initial" }}
-//         >
-//           Add
-//         </Button>
-//       </td>
-//       <td>
-//         <Button
-//           variant="contained"
-//           color="default"
-//           id={`${stock["symbol"]}-delete`}
-//           onLoad={getFaveData(stock)}
-//           onClick={() => deleteFaveData(stock)}
-//           className="delete-fave"
-//           style={{ display: "none" }}
-//         >
-//           DELETE
-//         </Button>
-//       </td>
-//     </tr>
-//   ));
-// }

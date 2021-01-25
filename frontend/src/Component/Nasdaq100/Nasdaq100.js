@@ -41,12 +41,11 @@ class StockAPI extends React.Component {
           fetch(url, {
             method: "GET",
             headers: {
-              "x-rapidapi-key":
-                "a2ee38ed73mshd61421606491fb7p1a46d1jsnd6ecf75b7c6b",
+              "x-rapidapi-key": "a2ee38ed73mshd61421606491fb7p1a46d1jsnd6ecf75b7c6b",
               "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
             },
-          }).then((res) => res.json())
-        )
+          }).then((res) => res.json()),
+        ),
       );
 
       let stockResult = [].concat(data[0], data[1], data[2]).flat(1);
@@ -75,17 +74,17 @@ class StockAPI extends React.Component {
         <h1 className="nasdaq100-headline1">Nasdaq 100 Components</h1>
         <div className="nasdaq100-stocks-list">
           <div className="stocks-container">
-            <Table className="stock-table">
+            <Table striped className="stock-table">
               <thead>{StockDescriptionFull()}</thead>
 
-              <StockTable group="nasdaq" type={nasdaqStocks} />
+              <tbody>
+                <StockTable group="nasdaq" type={nasdaqStocks} />
+              </tbody>
             </Table>
           </div>
         </div>
 
-        <div className="button stock-refresh-button">
-          {/* <Button onClick={this.callStockAPI}>Refresh</Button> */}
-        </div>
+        <div className="button stock-refresh-button">{/* <Button onClick={this.callStockAPI}>Refresh</Button> */}</div>
       </div>
     );
   }

@@ -4,10 +4,12 @@ import React from "react";
 // import React, { useEffect } from "react";
 import { createChart } from "lightweight-charts";
 
+import changeFontColor from "../QuoteColor";
+
+import { Input } from "reactstrap";
+
 export default function CurrencyChart({ baseCurrency, convertToCurrency }) {
-  return (
-    <Chart baseCurrency={baseCurrency} convertToCurrency={convertToCurrency} />
-  );
+  return <Chart baseCurrency={baseCurrency} convertToCurrency={convertToCurrency} />;
 }
 
 class Chart extends React.Component {
@@ -25,15 +27,10 @@ class Chart extends React.Component {
 
     this.callAPI = this.callAPI.bind(this);
     this.changeInterval = this.changeInterval.bind(this);
-    this.toggleFave = this.toggleFave.bind(this);
   }
 
   componentDidMount() {
-    this.callAPI(
-      this.state.interval,
-      this.props.baseCurrency,
-      this.props.convertToCurrency
-    );
+    this.callAPI(this.state.interval, this.props.baseCurrency, this.props.convertToCurrency);
   }
 
   componentDidUpdate(prevProps) {
@@ -41,11 +38,7 @@ class Chart extends React.Component {
       this.props.baseCurrency !== prevProps.baseCurrency ||
       this.props.convertToCurrency !== prevProps.convertToCurrency
     ) {
-      this.callAPI(
-        this.state.interval,
-        this.props.baseCurrency,
-        this.props.convertToCurrency
-      );
+      this.callAPI(this.state.interval, this.props.baseCurrency, this.props.convertToCurrency);
     }
   }
 
@@ -54,11 +47,7 @@ class Chart extends React.Component {
       interval: e.target.value,
     });
 
-    this.callAPI(
-      e.target.value,
-      this.props.baseCurrency,
-      this.props.convertToCurrency
-    );
+    this.callAPI(e.target.value, this.props.baseCurrency, this.props.convertToCurrency);
   }
 
   drawChart(data) {
@@ -128,18 +117,14 @@ class Chart extends React.Component {
           fetch(url, {
             method: "GET",
             headers: {
-              "x-rapidapi-key":
-                "a2ee38ed73mshd61421606491fb7p1a46d1jsnd6ecf75b7c6b",
-              "x-rapidapi-host":
-                "bloomberg-market-and-financial-news.p.rapidapi.com",
+              "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY,
+              "x-rapidapi-host": "bloomberg-market-and-financial-news.p.rapidapi.com",
             },
-          }).then((res) => res.json())
-        )
+          }).then((res) => res.json()),
+        ),
       );
-      let compactData =
-        data[0]["result"][`${baseCurrency}${convertToCurrency}:cur`];
-      let chartData =
-        data[1]["result"][`${baseCurrency}${convertToCurrency}:cur`]["ticks"];
+      let compactData = data[0]["result"][`${baseCurrency}${convertToCurrency.toUpperCase()}:CUR`];
+      let chartData = data[1]["result"][`${baseCurrency}${convertToCurrency.toUpperCase()}:CUR`]["ticks"];
 
       console.log("Compact:" + compactData + "\nChart:" + chartData);
 
@@ -162,29 +147,27 @@ class Chart extends React.Component {
     }
   }
 
-  toggleFave(id) {}
-
   render() {
     return (
       <>
         <div className="index-quote">
           <div className="chart-main">
-            <h1 id="currency-chart-name">{this.state.compact["name"]}</h1>
-            <h1>{this.state.compact["last"]}</h1>
-            <h2>{this.state.compact["netChange"]}</h2>
-            <h2>{this.state.compact["pctChange"] + "%"}</h2>
+            <h4 id="currency-chart-name">{this.state.compact["name"]}</h4>
+            <h3>{this.state.compact["last"]}</h3>
+            <h5 style={changeFontColor(this.state.compact["netChange"])}>{this.state.compact["netChange"]}</h5>
+            <h5 style={changeFontColor(this.state.compact["pctChange"])}>{this.state.compact["pctChange"] + "%"}</h5>
           </div>
           <div className="right-element">
             <div className="chart-title">
               <div>
-                <h2>High: {this.state.compact["dayHigh"]}</h2>
-                <h2>Low: {this.state.compact["dayLow"]}</h2>
+                <h5>High: {this.state.compact["dayHigh"]}</h5>
+                <h5>Low: {this.state.compact["dayLow"]}</h5>
               </div>
             </div>
             <div className="chart-title">
               <div>
-                <h2>52-week High: {this.state.compact["yearHigh"]}</h2>
-                <h2>52-week Low: {this.state.compact["yearLow"]}</h2>
+                <h5>52-week High: {this.state.compact["yearHigh"]}</h5>
+                <h5>52-week Low: {this.state.compact["yearLow"]}</h5>
               </div>
             </div>
           </div>
@@ -195,18 +178,15 @@ class Chart extends React.Component {
 
           <form className="chart-options">
             <div className="select-interval">
-              <h3>Interval</h3>
-              <select
-                value={this.state.interval}
-                onChange={this.changeInterval}
-              >
+              <h5>Interval</h5>
+              <Input type="select" value={this.state.interval} onChange={this.changeInterval}>
                 <option value="m1">1M</option>
                 <option value="m3">3M</option>
                 <option value="m6">6M</option>
                 <option value="ytd">YTD</option>
                 <option value="y1">1Y</option>
                 <option value="y5">5Y</option>
-              </select>
+              </Input>
             </div>
           </form>
         </div>

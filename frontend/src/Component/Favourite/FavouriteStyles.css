@@ -1,8 +1,60 @@
 .favourite-wrapper {
-  width: 75%;
-  margin: 50px auto;
+  width: 90vw;
+  margin: 2rem auto;
 }
 
 .favourite-wrapper h1 {
   font-weight: 800;
+}
+
+.favourite-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.favourite-container Button {
+  margin-right: 6px;
+  margin-left: 10px;
+}
+
+.tag-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #36364b;
+  padding: 0 2rem;
+}
+
+.tag-bar span {
+  margin-right: 1rem;
+  font-weight: 500;
+}
+
+.MuiIconButton-root {
+  width: 1rem !important;
+}
+
+.on-tag-red,
+.off-tag-red {
+  background-color: transparent !important;
+  color: #ca0000 !important;
+}
+.on-tag-yellow,
+.off-tag-yellow {
+  background-color: transparent !important;
+  color: #f0c60e !important;
+}
+.on-tag-green,
+.off-tag-green {
+  background-color: transparent !important;
+  color: green !important;
+}
+.on-tag-blue,
+.off-tag-blue {
+  background-color: transparent !important;
+  color: #007acc !important;
+}
+
+.color-tags {
+  display: flex;
+  justify-content: space-around;
 }

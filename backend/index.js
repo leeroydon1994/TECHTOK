@@ -25,6 +25,9 @@ app.use(RatingsRoutes);
 const Nasdaq100Routes = require("./routes/nasdaq100.js");
 app.use(Nasdaq100Routes);
 
+const StockTagsRoutes = require("./routes/stockTags.js");
+app.use(StockTagsRoutes);
+
 app.listen(8080, () => {
   console.log("Application is listening to port 8080!");
 });

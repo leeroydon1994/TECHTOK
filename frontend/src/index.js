@@ -7,11 +7,13 @@ import { Provider } from "react-redux";
 import LandingPage from "./Screens/LandingPage";
 import { store } from "./Redux/store";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 ReactDOM.render(
   <Provider store={store}>
     <LandingPage />
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
 
 // If you want to start measuring performance in your app, pass a function
