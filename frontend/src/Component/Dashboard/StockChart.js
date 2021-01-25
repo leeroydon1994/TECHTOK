@@ -60,8 +60,8 @@ class Chart extends React.Component {
 
   drawChart(data) {
     const chart = createChart(this.ref.current, {
-      width: 1234,
-      height: 730,
+      width: 800,
+      height: 481,
       layout: {
         backgroundColor: "#000000",
         textColor: "#d1d4dc",
@@ -309,11 +309,25 @@ class Chart extends React.Component {
                 <div className="select-index">
                   <h6>Index</h6>
                   <Input type="select" value={this.state.index} onChange={this.changeIndex}>
-                    <option value="ndx">NASDAQ 100</option>
-                    <option value="ccmp">NASDAQ Composite</option>
-                    <option value="spx">S&P 500</option>
-                    <option value="indu">Dow Jones Industrial</option>
-                    <option value="rty">Russell 2000</option>
+                    <optgroup label="-- Main Indices --">
+                      <option value="ndx">NASDAQ 100</option>
+                      <option value="ccmp">NASDAQ Composite</option>
+                      <option value="spx">S&P 500</option>
+                      <option value="indu">Dow Jones Industrial</option>
+                      <option value="rty">Russell 2000 Small Cap</option>
+                      <option value="nya">NYSE Composite</option>
+                    </optgroup>
+                    <optgroup label="-- Sector Performance --">
+                      <option value="nbi">NASDAQ BioTech Index</option>
+                      <option value="cutl">NASDAQ Telecom Index</option>
+                      <option value="ndf">NASDAQ Financial Index</option>
+                      <option value="mid">S&P 400 Mid Cap Index</option>
+                      <option value="sml">S&P 600 Small Cap Index</option>
+                      <option value="tran">Dow Jones Transportation Average</option>
+                      <option value="util">Dow Jones Utility Average</option>
+                      <option value="riy">Russell 1000 Big Cap</option>
+                      <option value="ray">Russell 3000 Total Equity</option>
+                    </optgroup>
                   </Input>
                 </div>
 
