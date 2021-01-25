@@ -205,7 +205,7 @@ export class StockAPI extends React.Component {
 
     return (
       <div className="ratings-wrapper">
-        <h1 className="ratings-headline12">Top 20 Stocks</h1>
+        <h1 className="ratings-headline12">Top 20 Hot Stocks</h1>
         <div className="top-20-list">
           <div className="ratings-list-stocks-list1">
             <div className="ratings-container stocks-container">

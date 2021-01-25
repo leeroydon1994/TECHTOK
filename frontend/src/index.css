@@ -83,4 +83,5 @@ code {
 td,
 th {
   vertical-align: middle !important;
+  /* padding: 0.5rem !important; */
 }

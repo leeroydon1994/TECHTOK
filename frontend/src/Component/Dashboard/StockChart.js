@@ -213,50 +213,50 @@ class Chart extends React.Component {
             <h6>Nasdaq 100</h6>
             <h2>{this.state.ndx["last"]}</h2>
             <h5>
-              <span style={changeFontColor(netChange)}>{this.state.ndx["netChange"]}</span>
+              <span style={changeFontColor(this.state.ndx["netChange"])}>{this.state.ndx["netChange"]}</span>
             </h5>
             <h5>
-              <span style={changeFontColor(changePercent)}>{this.state.ndx["pctChange"] + "%"}</span>
+              <span style={changeFontColor(this.state.ndx["pctChange"])}>{this.state.ndx["pctChange"] + "%"}</span>
             </h5>
           </div>
           <div className="main-index-box">
             <h6>Nasdaq Composite</h6>
             <h2>{this.state.ccmp["last"]}</h2>
             <h5>
-              <span style={changeFontColor(netChange)}>{this.state.ccmp["netChange"]}</span>
+              <span style={changeFontColor(this.state.ccmp["netChange"])}>{this.state.ccmp["netChange"]}</span>
             </h5>
             <h5>
-              <span style={changeFontColor(changePercent)}>{this.state.ccmp["pctChange"] + "%"}</span>
+              <span style={changeFontColor(this.state.ccmp["pctChange"])}>{this.state.ccmp["pctChange"] + "%"}</span>
             </h5>
           </div>
           <div className="main-index-box">
             <h6>S&P 500</h6>
             <h2>{this.state.spx["last"]}</h2>
             <h5>
-              <span style={changeFontColor(netChange)}>{this.state.spx["netChange"]}</span>
+              <span style={changeFontColor(this.state.spx["netChange"])}>{this.state.spx["netChange"]}</span>
             </h5>
             <h5>
-              <span style={changeFontColor(changePercent)}>{this.state.spx["pctChange"] + "%"}</span>
+              <span style={changeFontColor(this.state.spx["pctChange"])}>{this.state.spx["pctChange"] + "%"}</span>
             </h5>
           </div>
           <div className="main-index-box">
             <h6>iShares PHLX Semiconductor ETF</h6>
             <h2>{this.state.soxx["last"]}</h2>
             <h5>
-              <span style={changeFontColor(netChange)}>{this.state.soxx["netChange"]}</span>
+              <span style={changeFontColor(this.state.soxx["netChange"])}>{this.state.soxx["netChange"]}</span>
             </h5>
             <h5>
-              <span style={changeFontColor(changePercent)}>{this.state.soxx["pctChange"] + "%"}</span>
+              <span style={changeFontColor(this.state.soxx["pctChange"])}>{this.state.soxx["pctChange"] + "%"}</span>
             </h5>
           </div>
           <div className="main-index-box">
             <h6>iShares Expanded Tech-Software Sector ETF</h6>
             <h2>{this.state.igv["last"]}</h2>
             <h5>
-              <span style={changeFontColor(netChange)}>{this.state.igv["netChange"]}</span>
+              <span style={changeFontColor(this.state.igv["netChange"])}>{this.state.igv["netChange"]}</span>
             </h5>
             <h5>
-              <span style={changeFontColor(changePercent)}>{this.state.igv["pctChange"] + "%"}</span>
+              <span style={changeFontColor(this.state.igv["pctChange"])}>{this.state.igv["pctChange"] + "%"}</span>
             </h5>
           </div>
         </div>
@@ -313,7 +313,7 @@ class Chart extends React.Component {
                     <option value="ccmp">NASDAQ Composite</option>
                     <option value="spx">S&P 500</option>
                     <option value="indu">Dow Jones Industrial</option>
-                    <option value="igv">Russell 2000</option>
+                    <option value="rty">Russell 2000</option>
                   </Input>
                 </div>
 
