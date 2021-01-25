@@ -313,7 +313,7 @@ class Chart extends React.Component {
                       <option value="ndx">NASDAQ 100</option>
                       <option value="ccmp">NASDAQ Composite</option>
                       <option value="spx">S&P 500</option>
-                      <option value="indu">Dow Jones Industrial</option>
+                      <option value="indu">Dow Jones Industrial Average</option>
                       <option value="rty">Russell 2000 Small Cap</option>
                       <option value="nya">NYSE Composite</option>
                     </optgroup>
