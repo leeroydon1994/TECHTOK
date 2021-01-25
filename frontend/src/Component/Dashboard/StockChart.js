@@ -60,8 +60,8 @@ class Chart extends React.Component {
 
   drawChart(data) {
     const chart = createChart(this.ref.current, {
-      width: 1000,
-      height: 700,
+      width: 1234,
+      height: 730,
       layout: {
         backgroundColor: "#000000",
         textColor: "#d1d4dc",

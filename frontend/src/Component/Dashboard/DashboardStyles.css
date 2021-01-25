@@ -6,7 +6,6 @@
   width: 100%;
   background-color: rgb(255, 255, 255);
   padding: 1rem;
-  margin: 0 0.5rem;
   border: 3px solid rgb(255, 255, 255);
 }
 .dashboard-stocks-container h2 {
@@ -17,7 +16,7 @@
   width: 100%;
   background-color: rgb(255, 255, 255);
   padding: 1rem;
-  margin: 0 0.5rem;
+  margin: 0 1.5rem;
 
   border: 3px solid rgb(255, 255, 255);
 }
@@ -26,7 +25,6 @@
   width: 100%;
   background-color: rgb(255, 255, 255);
   padding: 1rem;
-  margin: 0 0.5rem;
 
   border: 3px solid rgb(255, 255, 255);
 }
@@ -63,7 +61,7 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  margin: 0 auto;
+  margin-left: 2rem;
 }
 
 .chart {
@@ -91,7 +89,7 @@
 .dashboard-stocks {
   display: flex;
   justify-content: space-between;
-  margin: 1rem 0;
+  margin: 3rem 0;
   width: 100%;
 }
 
