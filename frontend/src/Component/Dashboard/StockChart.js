@@ -321,10 +321,10 @@ class Chart extends React.Component {
                       <option value="nbi">NASDAQ BioTech Index</option>
                       <option value="cutl">NASDAQ Telecom Index</option>
                       <option value="ndf">NASDAQ Financial Index</option>
-                      <option value="mid">S&P 400 Mid Cap Index</option>
-                      <option value="sml">S&P 600 Small Cap Index</option>
                       <option value="tran">Dow Jones Transportation Average</option>
                       <option value="util">Dow Jones Utility Average</option>
+                      <option value="mid">S&P 400 Mid Cap Index</option>
+                      <option value="sml">S&P 600 Small Cap Index</option>
                       <option value="riy">Russell 1000 Big Cap</option>
                       <option value="ray">Russell 3000 Total Equity</option>
                     </optgroup>
