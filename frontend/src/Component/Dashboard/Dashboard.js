@@ -11,7 +11,6 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div className="dashboard-wrapper">
-        <br />
         {/* <h1 className="dashboard-title1">Dashboard</h1> */}
         <div className="graph">
           <StockChart />
