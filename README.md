@@ -1,6 +1,6 @@
 # TECHTOK
 
-A tech stock info site for beginners. Membership only.
+A tech stock info site for beginners.
 
 Start thinking and researching stocks. Simply Technically.
 
