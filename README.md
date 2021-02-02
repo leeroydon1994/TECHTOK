@@ -1,6 +1,6 @@
 # TECHTOK
 
-Tech Stock Info Site for Beginners.
+A tech stock info site for beginners.
 
 Start thinking and researching stocks. Simply Technically.
 
