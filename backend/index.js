@@ -1,3 +1,6 @@
+const https = require("https");
+const fs = require("fs");
+
 const express = require("express");
 const cors = require("cors"); // CORS - Cross Origin Resource Sharing
 const bodyParser = require("body-parser");
@@ -27,6 +30,13 @@ app.use(Nasdaq100Routes);
 
 const StockTagsRoutes = require("./routes/stockTags.js");
 app.use(StockTagsRoutes);
+
+// const options = {
+//   cert: fs.readFileSync("./localhost.crt"),
+//   key: fs.readFileSync("./localhost.key"),
+// };
+
+// https.createServer(options, app).listen(8443);
 
 app.listen(8080, () => {
   console.log("Application is listening to port 8080!");

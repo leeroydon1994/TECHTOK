@@ -61,8 +61,8 @@ export default class LandingPage extends React.Component {
             <PrivateRoute exact path="/blog" component={BlogPage} />
             <PrivateRoute exact path="/news" component={NewsPage} />
 
-            <Route path="/login" component={LoginPage} />
-            <Route path="/signup" component={SignUpPage} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/signup" component={SignUpPage} />
           </Switch>
         </Router>
         {/* <div

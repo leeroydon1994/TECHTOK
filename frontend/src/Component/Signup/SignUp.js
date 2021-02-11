@@ -52,7 +52,6 @@ export class SignUp extends React.Component {
           <div className="signup-form">
             <div className="signup-text-box">
               <h1>TECHTOK</h1>
-
               <p>
                 “In any sector, trade the leading stock – the one showing the <em>strongest</em> trend”
               </p>

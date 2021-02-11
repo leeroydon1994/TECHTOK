@@ -2,7 +2,6 @@
   "name": "myapp",
   "version": "0.1.0",
   "private": true,
-  
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
@@ -14,6 +13,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "connected-react-router": "^6.8.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-simple": "^0.5.6",
     "lightweight-charts": "^3.2.0",
@@ -35,8 +35,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "HTTPS=true react-scripts start",
+    "build": "HTTPS=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -58,6 +58,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://tecktok.xyz"
-
+  "homepage": "https://techtok.xyz/"
 }

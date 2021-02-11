@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { loginUserThunk, loginFacebookThunk } from "../../Redux/Auth/actions";
 import "./loginStyle.css";
 import FacebookLogin from "react-facebook-login";
-import { withRouter } from "react-router";
+import { Redirect, withRouter } from "react-router";
 
 import { Button } from "@material-ui/core";
 import { Input } from "reactstrap";
@@ -27,10 +27,11 @@ export class PureLogin extends React.Component {
     });
   };
   login = () => {
+    console.log("LOGIN");
     this.props.loginRedux(this.state.email, this.state.password);
-    if (this.props.isAuthenticated) {
-      this.props.history.push("/");
-    }
+
+    // if (this.props.isAuthenticated) {
+    // }
   };
 
   componentClick() {
@@ -45,12 +46,20 @@ export class PureLogin extends React.Component {
   };
 
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="login-wrapper">
         <form>
           <div className="login-form">
             <div className="login-text-box">
               <h1>TECHTOK</h1>
+              <p className="Intro">
+                Start thinking and researching stocks. <span>Simply Technically.</span>
+              </p>
+
               <p>
                 "Whatever happens in the stock market <em>today</em> has happened <em>before</em> and will happen{" "}
                 <em>again</em>
@@ -87,13 +96,13 @@ export class PureLogin extends React.Component {
             <div className="login-button-box">
               <div className="form-group">
                 <Button
-                  type="submit"
                   className="btn btn-primary btn-lg login-button-login-page"
-                  onClick={this.login}
+                  onClick={() => {
+                    this.login();
+                  }}
                   variant="contained"
                   size="large"
                   color="primary"
-                  href="/"
                 >
                   Login
                 </Button>
@@ -111,7 +120,6 @@ export class PureLogin extends React.Component {
 
             <div className="form-group">
               <Button
-                type="submit"
                 className="btn btn-primary btn-lg signup-button-login-page"
                 variant="contained"
                 size="large"

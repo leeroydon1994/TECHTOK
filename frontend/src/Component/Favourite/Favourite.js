@@ -271,7 +271,7 @@ export class StockAPI extends React.Component {
         </div>
         <div className="stocks-list">
           <div className="stocks-container">
-            <Table striped className="stock-table">
+            <Table className="stock-table">
               <thead>{StockDescriptionFull()}</thead>
               <tbody>
                 <StockTable

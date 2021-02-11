@@ -32,6 +32,7 @@
 .login-text-box p {
   color: #4d4f5c;
   font-size: 1.1rem;
+  margin-top: 4rem;
 }
 
 .login-wrapper form {
@@ -62,6 +63,10 @@
 .login-text-box h1,
 .login-text-box p {
   margin-bottom: 1rem;
+}
+
+.login-text-box span {
+  font-weight: 800;
 }
 
 .login-wrapper form Input {

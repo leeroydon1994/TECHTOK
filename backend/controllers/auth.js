@@ -7,6 +7,8 @@ const axios = require("axios");
 const config = require("../config");
 const app = express();
 
+const bcrypt = require("./bcrypt.js");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
@@ -19,30 +21,41 @@ app.use(authClass.initialize());
 
 exports.postLogin = async function (req, res) {
   console.log("logging in");
-  console.log(req.body.email, req.body.password);
+  console.log(req.body.email);
 
   // FROM A REAL DATABASE
   if (req.body.email && req.body.password) {
     let email = req.body.email;
     let password = req.body.password;
-    let query = await knex.select("*").from("users").where("email", email).andWhere("password", password);
+    let query = await knex.select("*").from("users").where("email", email);
 
     console.log(query, "QUERY");
 
     if (query) {
-      let payload = {
-        id: query[0].id,
-        name: query[0].name,
-      };
-      let token = jwt.sign(payload, config.jwtSecret);
-      res.json({
-        token: token,
-        userName: query[0].name,
-      });
+      let result = await bcrypt.checkPassword(password, query[0].password);
+      console.log(result);
+
+      if (result === true) {
+        let payload = {
+          id: query[0].id,
+          name: query[0].name,
+        };
+        let token = jwt.sign(payload, config.jwtSecret);
+        console.log(token);
+        res.json({
+          token: token,
+          userName: query[0].name,
+        });
+      } else {
+        console.log("Incorrect password.");
+        res.sendStatus(401);
+      }
     } else {
+      console.log("No such user.");
       res.sendStatus(401);
     }
   } else {
+    console.log("No input!");
     res.sendStatus(401);
   }
 };
@@ -116,6 +129,9 @@ exports.postSignUp = async function (req, res) {
     let { name, password, email } = req.body;
     console.log(req.body);
 
+    let hash = await bcrypt.hashPassword(password);
+    console.log(hash);
+
     let query = await knex
       .select("email")
       .from("users")
@@ -125,7 +141,7 @@ exports.postSignUp = async function (req, res) {
           return knex("users")
             .insert({
               name: name,
-              password: password,
+              password: hash,
               email: email,
             })
             .returning("id");
