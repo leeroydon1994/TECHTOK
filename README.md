@@ -24,4 +24,4 @@ This project aims to create a simple yet comprehensive information site of tech 
 ## Technology Stack
 
 - Frontend: React.js, Redux.js, Reactstrap, Material.ui
-- Backend: Node.js, Express.js, PostgreSQL, Knex.js, JWT
+- Backend: Node.js, Express.js, PostgreSQL, Knex.js, Passport.js, bcrypt， JWT
