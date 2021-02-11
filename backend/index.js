@@ -31,13 +31,13 @@ app.use(Nasdaq100Routes);
 const StockTagsRoutes = require("./routes/stockTags.js");
 app.use(StockTagsRoutes);
 
-// const options = {
-//   cert: fs.readFileSync("./localhost.crt"),
-//   key: fs.readFileSync("./localhost.key"),
-// };
+const options = {
+  cert: fs.readFileSync("./localhost.crt"),
+  key: fs.readFileSync("./localhost.key"),
+};
 
-// https.createServer(options, app).listen(8443);
+https.createServer(options, app).listen(8443);
 
-app.listen(8080, () => {
-  console.log("Application is listening to port 8080!");
-});
+// app.listen(8080, () => {
+//   console.log("Application is listening to port 8080!");
+// });

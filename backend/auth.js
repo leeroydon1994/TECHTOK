@@ -20,7 +20,7 @@ module.exports = (knex) => {
       } else {
         return done(new Error("User Not Found", null));
       }
-    }
+    },
   );
   passport.use(strategy);
   return {

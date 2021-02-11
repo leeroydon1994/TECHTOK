@@ -41,7 +41,7 @@ export class StockAPI extends React.Component {
     fetch(api, {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "a2ee38ed73mshd61421606491fb7p1a46d1jsnd6ecf75b7c6b",
+        "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY,
         "x-rapidapi-host": "yahoo-finance15.p.rapidapi.com",
       },
     })
