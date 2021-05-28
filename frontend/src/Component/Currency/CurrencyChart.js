@@ -9,7 +9,9 @@ import changeFontColor from "../QuoteColor";
 import { Input } from "reactstrap";
 
 export default function CurrencyChart({ baseCurrency, convertToCurrency }) {
-  return <Chart baseCurrency={baseCurrency} convertToCurrency={convertToCurrency} />;
+  return (
+    <Chart baseCurrency={baseCurrency} convertToCurrency={convertToCurrency} />
+  );
 }
 
 class Chart extends React.Component {
@@ -30,7 +32,11 @@ class Chart extends React.Component {
   }
 
   componentDidMount() {
-    this.callAPI(this.state.interval, this.props.baseCurrency, this.props.convertToCurrency);
+    this.callAPI(
+      this.state.interval,
+      this.props.baseCurrency,
+      this.props.convertToCurrency,
+    );
   }
 
   componentDidUpdate(prevProps) {
@@ -38,7 +44,11 @@ class Chart extends React.Component {
       this.props.baseCurrency !== prevProps.baseCurrency ||
       this.props.convertToCurrency !== prevProps.convertToCurrency
     ) {
-      this.callAPI(this.state.interval, this.props.baseCurrency, this.props.convertToCurrency);
+      this.callAPI(
+        this.state.interval,
+        this.props.baseCurrency,
+        this.props.convertToCurrency,
+      );
     }
   }
 
@@ -47,7 +57,11 @@ class Chart extends React.Component {
       interval: e.target.value,
     });
 
-    this.callAPI(e.target.value, this.props.baseCurrency, this.props.convertToCurrency);
+    this.callAPI(
+      e.target.value,
+      this.props.baseCurrency,
+      this.props.convertToCurrency,
+    );
   }
 
   drawChart(data) {
@@ -118,15 +132,20 @@ class Chart extends React.Component {
             method: "GET",
             headers: {
               "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY,
-              "x-rapidapi-host": "bloomberg-market-and-financial-news.p.rapidapi.com",
+              "x-rapidapi-host":
+                "bloomberg-market-and-financial-news.p.rapidapi.com",
             },
           }).then((res) => res.json()),
         ),
       );
-      let compactData = data[0]["result"][`${baseCurrency}${convertToCurrency.toUpperCase()}:CUR`];
-      let chartData = data[1]["result"][`${baseCurrency}${convertToCurrency.toUpperCase()}:CUR`]["ticks"];
-
-      console.log("Compact:" + compactData + "\nChart:" + chartData);
+      let compactData =
+        data[0]["result"][
+          `${baseCurrency}${convertToCurrency.toUpperCase()}:CUR`
+        ];
+      let chartData =
+        data[1]["result"][
+          `${baseCurrency}${convertToCurrency.toUpperCase()}:CUR`
+        ]["ticks"];
 
       // Deep clone
       let realChartData = chartData.map((tick) => {
@@ -143,7 +162,7 @@ class Chart extends React.Component {
 
       this.drawChart(realChartData);
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 
@@ -154,8 +173,12 @@ class Chart extends React.Component {
           <div className="chart-main">
             <h4 id="currency-chart-name">{this.state.compact["name"]}</h4>
             <h3>{this.state.compact["last"]}</h3>
-            <h5 style={changeFontColor(this.state.compact["netChange"])}>{this.state.compact["netChange"]}</h5>
-            <h5 style={changeFontColor(this.state.compact["pctChange"])}>{this.state.compact["pctChange"] + "%"}</h5>
+            <h5 style={changeFontColor(this.state.compact["netChange"])}>
+              {this.state.compact["netChange"]}
+            </h5>
+            <h5 style={changeFontColor(this.state.compact["pctChange"])}>
+              {this.state.compact["pctChange"] + "%"}
+            </h5>
           </div>
           <div className="right-element">
             <div className="chart-title">
@@ -179,7 +202,11 @@ class Chart extends React.Component {
           <form className="chart-options">
             <div className="select-interval">
               <h5>Interval</h5>
-              <Input type="select" value={this.state.interval} onChange={this.changeInterval}>
+              <Input
+                type="select"
+                value={this.state.interval}
+                onChange={this.changeInterval}
+              >
                 <option value="m1">1M</option>
                 <option value="m3">3M</option>
                 <option value="m6">6M</option>

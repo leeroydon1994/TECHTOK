@@ -44,7 +44,6 @@ class CurrencyConverter extends React.Component {
 
     fetch(api)
       .then((results) => {
-        console.log(results);
         return results.json();
       })
       .then((data) =>
@@ -73,7 +72,8 @@ class CurrencyConverter extends React.Component {
 
   // Consider render() first
   render() {
-    const { currencies, rates, baseCurrency, baseAmount, convertToCurrency } = this.state;
+    const { currencies, rates, baseCurrency, baseAmount, convertToCurrency } =
+      this.state;
 
     const currencyChoice = currencies.map((currency) => (
       <option key={currency} value={currency}>
@@ -82,29 +82,49 @@ class CurrencyConverter extends React.Component {
       </option>
     ));
 
-    const result = this.getConvertedCurrency(baseAmount, convertToCurrency, rates);
+    const result = this.getConvertedCurrency(
+      baseAmount,
+      convertToCurrency,
+      rates,
+    );
 
     return (
       <div className="currency-wrapper">
         <h1>Currency Convertor</h1>
 
-        <CurrencyChart baseCurrency={baseCurrency} convertToCurrency={convertToCurrency} />
+        <CurrencyChart
+          baseCurrency={baseCurrency}
+          convertToCurrency={convertToCurrency}
+        />
 
         <div className="main ui text container">
           <div className="form-container">
             <form className="ui mini form">
               <h5>Convert from: {baseCurrency}</h5>
-              <Input type="select" value={baseCurrency} onChange={this.changeBaseCurrency}>
+              <Input
+                type="select"
+                value={baseCurrency}
+                onChange={this.changeBaseCurrency}
+              >
                 {currencyChoice}
               </Input>
 
               <h5>Convert to: {convertToCurrency}</h5>
-              <Input type="select" value={convertToCurrency} onChange={this.changeConvertToCurrency}>
+              <Input
+                type="select"
+                value={convertToCurrency}
+                onChange={this.changeConvertToCurrency}
+              >
                 {currencyChoice}
               </Input>
 
               <h5>Amount:</h5>
-              <Input type="number" id="base-amount" defaultValue={baseAmount} onChange={this.changeBaseAmount}></Input>
+              <Input
+                type="number"
+                id="base-amount"
+                defaultValue={baseAmount}
+                onChange={this.changeBaseAmount}
+              ></Input>
             </form>
             <h4 id="result-text">
               {baseAmount} {baseCurrency} = {result} {convertToCurrency}

@@ -16,17 +16,13 @@ exports.postAddBlog = async function (req, res) {
   // unpack token and get the user id
 
   let token = req.headers.authorization.split(" ")[1];
-  // console.log(token);
   let decoded = jwt.verify(token, config.jwtSecret);
-  // console.log(decoded);
 
   // insert data
-
   if (req.body) {
     let { headline, content } = req.body;
-    // console.log(req.body);
 
-    let query = await knex
+    await knex
       .select("headline")
       .from("blogs")
       .where("headline", headline)
@@ -47,7 +43,7 @@ exports.postAddBlog = async function (req, res) {
                 .into("user_blog")
                 .returning("id")
                 .catch((err) => {
-                  console.log(err);
+                  console.error(err);
                 });
 
               let blog = {
@@ -59,11 +55,6 @@ exports.postAddBlog = async function (req, res) {
             });
         }
       });
-    // res.send(data, "addblog done");
-    //insert user id and blog id into user_blog table
-
-    //then send the done msg or all the blogs
-    // where user id == user id
   }
 };
 
@@ -71,18 +62,17 @@ exports.postAddBlog = async function (req, res) {
 
 exports.getBlogList = async function (req, res) {
   let token = req.headers.authorization.split(" ")[1];
-  // console.log(token);
   let decoded = jwt.verify(token, config.jwtSecret);
-  // console.log(decoded);
 
-  let data = await knex("user_blog").select("blog_id").where("user_id", "=", decoded.id);
-  // .orderBy("id");
+  let data = await knex("user_blog")
+    .select("blog_id")
+    .where("user_id", "=", decoded.id);
 
-  // console.log(data);
   let blogArray = [];
   let info = data.map(async (blog, i) => {
-    let blogs = await knex("blogs").select("*").where("blogs.id", "=", blog.blog_id);
-    // console.log(blogs[0]);
+    let blogs = await knex("blogs")
+      .select("*")
+      .where("blogs.id", "=", blog.blog_id);
     blogArray.push(blogs[0]);
   });
 
@@ -90,8 +80,6 @@ exports.getBlogList = async function (req, res) {
     blogArray.sort(function (a, b) {
       return a.id - b.id;
     });
-    console.log(blogArray, "BLOG ARRAY");
-    console.log("read done");
     res.send(blogArray);
   });
 };
@@ -99,16 +87,16 @@ exports.getBlogList = async function (req, res) {
 // edit blog
 
 exports.putEditBlog = async function (req, res) {
-  // console.log(req.headers);
   let token = req.headers.authorization.split(" ")[1];
 
   let decoded = jwt.verify(token, config.jwtSecret);
 
   if (req.body) {
     let { headline, content } = req.body;
-    console.log(req.body, "EDIT BLOG");
 
-    let query = await knex("user_blog").select("blog_id").where("user_id", "=", decoded.id);
+    let query = await knex("user_blog")
+      .select("blog_id")
+      .where("user_id", "=", decoded.id);
 
     await knex("user_blog")
       .where({
@@ -116,8 +104,6 @@ exports.putEditBlog = async function (req, res) {
         "user_blog.blog_id": req.params.id,
       })
       .then(async (query) => {
-        console.log(query, "EDIT QUERY");
-        console.log(headline, content);
         if (query[0]) {
           await knex("blogs").where("blogs.id", "=", req.params.id).update({
             headline: headline,
@@ -133,17 +119,10 @@ exports.putEditBlog = async function (req, res) {
 // delete blog
 
 exports.deleteBlog = async function (req, res) {
-  console.log(req.headers);
   let token = req.headers.authorization.split(" ")[1];
-  // console.log(token);
   let decoded = jwt.verify(token, config.jwtSecret);
-  // console.log(decoded);
 
-  let query = await knex("user_blog").select("blog_id").where("user_id", decoded.id);
-
-  // console.log(query); // [ { blog_idq: 32 }, { blog_id: 33 }, { blog_id: 34 }, { blog_id: 35 } ]
-  // console.log(decoded.id); // 18
-  console.log(req.params.id);
+  await knex("user_blog").select("blog_id").where("user_id", decoded.id);
 
   await knex("user_blog")
     .where({
@@ -152,7 +131,6 @@ exports.deleteBlog = async function (req, res) {
     })
     .del()
     .then(async (query) => {
-      console.log(query);
       if (query === 1) {
         await knex("blogs").where("blogs.id", "=", req.params.id).del();
       }

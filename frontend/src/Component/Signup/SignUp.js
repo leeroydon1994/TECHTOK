@@ -2,8 +2,7 @@ import React from "react";
 import "./signupstyle.css";
 import { connect } from "react-redux";
 import { Button } from "@material-ui/core";
-// import { withRouter } from 'react-router-dom';
-import { signupUserThunk /*signupUserFatchThunk*/ } from "../../Redux/Signup/actions";
+import { signupUserThunk } from "../../Redux/Signup/actions";
 import { Input } from "reactstrap";
 
 import { withRouter } from "react-router";
@@ -19,9 +18,6 @@ export class SignUp extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
-    // let accessToken = localStorage.getItem("token");
-    // this.props.signupUserFatchRedux(accessToken);
   }
 
   onChange(e) {
@@ -30,7 +26,6 @@ export class SignUp extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
     this.props.signupRedux({
       name: this.state.name,
       email: this.state.email,
@@ -53,7 +48,8 @@ export class SignUp extends React.Component {
             <div className="signup-text-box">
               <h1>TECHTOK</h1>
               <p>
-                “In any sector, trade the leading stock – the one showing the <em>strongest</em> trend”
+                “In any sector, trade the leading stock – the one showing the{" "}
+                <em>strongest</em> trend”
               </p>
               <cite>- Jesse Livermore</cite>
             </div>
@@ -146,8 +142,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     signupRedux: (user) => dispatch(signupUserThunk(user)),
-    // signupUserFatchRedux: (accessToken) =>
-    //   dispatch(signupUserFatchThunk(accessToken)),
   };
 };
 

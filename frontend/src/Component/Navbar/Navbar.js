@@ -1,9 +1,6 @@
-// import React, { useState } from "react";
 import React from "react";
-import * as FaIcons from "react-icons/fa"; // Import all asUse "FaIcons.IconName" as class name
-// import * as AiIcons from "react-icons/ai";
+import * as FaIcons from "react-icons/fa";
 import { Link } from "react-router-dom";
-// import { SidebarData } from "./SidebarData";
 import { LoginSidebarData } from "./LoginSidebarData";
 import "./Navbar.css";
 import { IconContext } from "react-icons";
@@ -15,10 +12,6 @@ import Footer from "./NavbarFooter";
 //Icons
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 export class Navbar extends React.Component {
-  // const [sidebar, setSidebar] = useState(false);
-
-  // const showSidebar = () => setSidebar(!sidebar);
-
   constructor(props) {
     super(props);
 
@@ -68,7 +61,11 @@ export class Navbar extends React.Component {
                     </Button>
                   </div>
                 </div>
-                <nav className={this.state.sidebar ? "nav-menu active" : "nav-menu"}>
+                <nav
+                  className={
+                    this.state.sidebar ? "nav-menu active" : "nav-menu"
+                  }
+                >
                   <ul className="nav-menu-items" onClick={this.showSidebar}>
                     <li className="navbar-toggle">
                       <h1>TECHTOK</h1>
@@ -93,35 +90,6 @@ export class Navbar extends React.Component {
           </div>
         ) : (
           <div></div>
-          // <div>
-          //   <IconContext.Provider value={{ color: "#f5f5f5" }}>
-          //     <div className="navbar">
-          //       <Link to="#" className="menu-bars">
-          //         <FaIcons.FaBars onClick={this.showSidebar} />
-          //       </Link>
-          //     </div>
-          //     <nav className={this.state.sidebar ? "nav-menu active" : "nav-menu"}>
-          //       <ul className="nav-menu-items" onClick={this.showSidebar}>
-          //         <li className="navbar-toggle">
-          //           <h1>TECHTOK</h1>
-          //         </li>
-          //         {SidebarData.map((item, index) => {
-          //           return (
-          //             <li key={index} className={item.cName}>
-          //               <Link to={item.path}>
-          //                 {item.icon}
-          //                 <span>{item.title}</span>
-          //               </Link>
-          //             </li>
-          //           );
-          //         })}
-          //         <div className="footer">
-          //           <Footer />
-          //         </div>
-          //       </ul>
-          //     </nav>
-          //   </IconContext.Provider>
-          // </div>
         )}
       </div>
     );

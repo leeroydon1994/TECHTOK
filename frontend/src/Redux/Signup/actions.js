@@ -17,20 +17,12 @@ export function signupFailureActionCreator(message) {
   };
 }
 
-//   body.JSON.stringify(email, password, name)
-
 export function signupUserThunk(user) {
-  console.log("link before backend");
   return (dispatch) => {
-    return (
-      axios
-        .post(`${process.env.REACT_APP_API_SERVER}/api/signup`, user)
-        //`${process.env.REACT_APP_API_SERVER}/api/signup`
-        .then((res) => {
-          console.log("coming from the backend");
-          console.log(res);
-          dispatch(signupSuccessActionCreator(user));
-        })
-    );
+    return axios
+      .post(`${process.env.REACT_APP_API_SERVER}/api/signup`, user)
+      .then((res) => {
+        dispatch(signupSuccessActionCreator(user));
+      });
   };
 }

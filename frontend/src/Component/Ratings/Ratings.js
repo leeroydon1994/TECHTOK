@@ -1,7 +1,5 @@
 import React from "react";
-// import axios from "axios";
 import "./RatingsStyles.css";
-// import Button from '@material-ui/core/Button';
 
 import StockTable from "./RatingsStockTable";
 import StockDescriptionFull from "../StockTable/StockDescriptionFull";
@@ -35,7 +33,6 @@ export class StockAPI extends React.Component {
   }
 
   callStockAPI(input) {
-    console.log(input);
     let api = `https://yahoo-finance15.p.rapidapi.com/api/yahoo/qu/quote/${input}`;
 
     fetch(api, {
@@ -49,29 +46,24 @@ export class StockAPI extends React.Component {
         return res.json();
       })
       .then((stockResult) => {
-        console.log(stockResult);
         // Unify the "longName" key in each object to "name", in order to fit the syntax of Bloomberg API
         const mappedStockResult = stockResult.map((item) => {
           let obj = { ...item };
           obj["name"] = item["longName"];
           return obj;
         });
-        console.log(mappedStockResult);
         this.setState({
           stockRatings: mappedStockResult,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }
 
   // Change the color of the button
   changeDeleteButtonStyle(symbol) {
-    // let buttonAdd = document.getElementById(`${symbol}-${id}-${type}-add`);
-    // let buttonDelete = document.getElementById(`${symbol}-${id}-${type}-delete`);
     let buttonAdd = document.getElementsByClassName(`${symbol}-add`);
     let buttonDelete = document.getElementsByClassName(`${symbol}-delete`);
 
-    console.log(buttonAdd);
     let displayArray = ["display: initial", "display: none"];
 
     for (let i = 0; i < buttonAdd.length; i++) {
@@ -86,7 +78,6 @@ export class StockAPI extends React.Component {
     let buttonAdd = document.getElementsByClassName(`${symbol}-add`);
     let buttonDelete = document.getElementsByClassName(`${symbol}-delete`);
 
-    console.log(buttonAdd);
     let displayArray = ["display: initial", "display: none"];
 
     for (let i = 0; i < buttonAdd.length; i++) {
@@ -104,8 +95,6 @@ export class StockAPI extends React.Component {
         headers: { Authorization: `Bearer ${this.user}` },
       })
       .then((res) => {
-        console.log(res.data.flat(1));
-
         // Push all symbols into a single array
         let symbolArray = [];
         let symbolCountObj = {};
@@ -117,44 +106,35 @@ export class StockAPI extends React.Component {
           symbolCountObj[symbol] = (symbolCountObj[symbol] || 0) + 1;
         });
 
-        console.log(symbolCountObj);
-        let sortedSymbolArray = Object.entries(symbolCountObj).sort((a, b) => b[1] - a[1]);
-        console.log(sortedSymbolArray);
+        let sortedSymbolArray = Object.entries(symbolCountObj).sort(
+          (a, b) => b[1] - a[1],
+        );
 
-        let ratingsSymbol = sortedSymbolArray.map((item) => item[0]).slice(0, 20);
-        console.log(ratingsSymbol.toString());
+        let ratingsSymbol = sortedSymbolArray
+          .map((item) => item[0])
+          .slice(0, 20);
 
         this.callStockAPI(ratingsSymbol.toString());
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }
 
   // Fave
   getFaveData(stock) {
-    console.log(this.user);
     axios
       .get(`${process.env.REACT_APP_API_SERVER}/api/stock/`, {
         headers: { Authorization: `Bearer ${this.user}` },
       })
       .then((res) => {
-        console.log(stock["symbol"]);
-        console.log(res.data);
-
         if (res.data.some((row) => row.symbol === stock["symbol"])) {
-          console.log("Change button for " + stock["symbol"] + "!");
           this.changeDeleteButtonStyle(stock["symbol"]);
-          // this.addedFavoriteBoolean(stock["symbol"]);
         } else {
-          console.log("Not to change the button for " + stock["symbol"] + "!");
-          // this.beforeFavoriteBoolean(stock["symbol"]);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   }
 
   addFaveData(stock) {
-    console.log(stock["name"], stock["symbol"]);
-
     axios
       .post(
         `${process.env.REACT_APP_API_SERVER}/api/stock/`,
@@ -167,36 +147,30 @@ export class StockAPI extends React.Component {
         },
       )
       .then((res) => {
-        console.log(res.data);
-
         if (res.data.some((row) => row.symbol === stock["symbol"])) {
           this.changeDeleteButtonStyle(stock["symbol"]);
-          console.log(stock["symbol"] + "is added to the favorite list.");
-          // this.addedFavoriteBoolean(stock["symbol"]);
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 
   deleteFaveData(stock) {
-    console.log(stock["name"], stock["symbol"]);
-
     axios
-      .delete(`${process.env.REACT_APP_API_SERVER}/api/stock/${stock["symbol"]}`, {
-        headers: { Authorization: `Bearer ${this.user}` },
-      })
+      .delete(
+        `${process.env.REACT_APP_API_SERVER}/api/stock/${stock["symbol"]}`,
+        {
+          headers: { Authorization: `Bearer ${this.user}` },
+        },
+      )
       .then((res) => {
-        console.log(res.data);
         if (res.data.some((row) => row.symbol !== stock["symbol"])) {
           this.changeAddButtonStyle(stock["symbol"]);
-          // this.beforeFavoriteBoolean(stock["symbol"]);
-          console.log(stock["symbol"] + "is deleted from the favorite list.");
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 
@@ -223,9 +197,7 @@ export class StockAPI extends React.Component {
             </div>
           </div>
 
-          <div className="button stock-refresh-button">
-            {/* <Button onClick={this.callStockAPI}>Refresh</Button> */}
-          </div>
+          <div className="button stock-refresh-button"></div>
         </div>
       </div>
     );

@@ -1,7 +1,6 @@
 // ---------------------------------------------------------------- npm install lightweight-charts ------------------------------
 
 import React from "react";
-// import React, { useEffect } from "react";
 import { createChart } from "lightweight-charts";
 import { Form, Input, FormGroup } from "reactstrap";
 
@@ -45,7 +44,6 @@ class Chart extends React.Component {
     this.setState({
       interval: e.target.value,
     });
-    console.log(e.target.value, this.state.interval, this.state.index);
 
     this.callAPI(e.target.value, this.state.index);
   }
@@ -54,7 +52,6 @@ class Chart extends React.Component {
     this.setState({
       index: e.target.value,
     });
-    console.log(e.target.value, this.state.interval, this.state.index);
     this.callAPI(this.state.interval, e.target.value);
   }
 
@@ -119,14 +116,14 @@ class Chart extends React.Component {
         method: "GET",
         headers: {
           "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY,
-          "x-rapidapi-host": "bloomberg-market-and-financial-news.p.rapidapi.com",
+          "x-rapidapi-host":
+            "bloomberg-market-and-financial-news.p.rapidapi.com",
         },
       })
         .then((results) => {
           return results.json();
         })
         .then((data) => {
-          // console.log(data[0]["result"][`NDX:IND`]["last"]);
           let compactData1 = data["result"][`NDX:IND`];
           let compactData2 = data["result"][`CCMP:IND`];
           let compactData3 = data["result"][`SPX:IND`];
@@ -141,7 +138,7 @@ class Chart extends React.Component {
           });
         });
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 
@@ -155,22 +152,20 @@ class Chart extends React.Component {
     ];
 
     try {
-      // console.log(process.env.REACT_APP_RAPIDAPI_KEY);
       let data = await Promise.all(
         urls.map((url) =>
           fetch(url, {
             method: "GET",
             headers: {
               "x-rapidapi-key": process.env.REACT_APP_RAPIDAPI_KEY,
-              "x-rapidapi-host": "bloomberg-market-and-financial-news.p.rapidapi.com",
+              "x-rapidapi-host":
+                "bloomberg-market-and-financial-news.p.rapidapi.com",
             },
           }).then((res) => res.json()),
         ),
       );
       let compactData = data[0]["result"][`${index.toUpperCase()}:IND`];
       let chartData = data[1]["result"][`${index.toUpperCase()}:IND`]["ticks"];
-
-      console.log("Compact:" + compactData + "\nChart:" + chartData);
 
       // Deep clone, convert the UTC time to EDT
       let realChartData = chartData.map((tick) => {
@@ -187,7 +182,7 @@ class Chart extends React.Component {
 
       this.drawChart(realChartData);
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
     }
   }
 
@@ -215,50 +210,70 @@ class Chart extends React.Component {
             <h6>Nasdaq 100</h6>
             <h2>{this.state.ndx["last"]}</h2>
             <h5>
-              <span style={changeFontColor(this.state.ndx["netChange"])}>{this.state.ndx["netChange"]}</span>
+              <span style={changeFontColor(this.state.ndx["netChange"])}>
+                {this.state.ndx["netChange"]}
+              </span>
             </h5>
             <h5>
-              <span style={changeFontColor(this.state.ndx["pctChange"])}>{this.state.ndx["pctChange"] + "%"}</span>
+              <span style={changeFontColor(this.state.ndx["pctChange"])}>
+                {this.state.ndx["pctChange"] + "%"}
+              </span>
             </h5>
           </div>
           <div className="main-index-box">
             <h6>Nasdaq Composite</h6>
             <h2>{this.state.ccmp["last"]}</h2>
             <h5>
-              <span style={changeFontColor(this.state.ccmp["netChange"])}>{this.state.ccmp["netChange"]}</span>
+              <span style={changeFontColor(this.state.ccmp["netChange"])}>
+                {this.state.ccmp["netChange"]}
+              </span>
             </h5>
             <h5>
-              <span style={changeFontColor(this.state.ccmp["pctChange"])}>{this.state.ccmp["pctChange"] + "%"}</span>
+              <span style={changeFontColor(this.state.ccmp["pctChange"])}>
+                {this.state.ccmp["pctChange"] + "%"}
+              </span>
             </h5>
           </div>
           <div className="main-index-box">
             <h6>S&P 500</h6>
             <h2>{this.state.spx["last"]}</h2>
             <h5>
-              <span style={changeFontColor(this.state.spx["netChange"])}>{this.state.spx["netChange"]}</span>
+              <span style={changeFontColor(this.state.spx["netChange"])}>
+                {this.state.spx["netChange"]}
+              </span>
             </h5>
             <h5>
-              <span style={changeFontColor(this.state.spx["pctChange"])}>{this.state.spx["pctChange"] + "%"}</span>
+              <span style={changeFontColor(this.state.spx["pctChange"])}>
+                {this.state.spx["pctChange"] + "%"}
+              </span>
             </h5>
           </div>
           <div className="main-index-box">
             <h6>iShares PHLX Semiconductor ETF</h6>
             <h2>{this.state.soxx["last"]}</h2>
             <h5>
-              <span style={changeFontColor(this.state.soxx["netChange"])}>{this.state.soxx["netChange"]}</span>
+              <span style={changeFontColor(this.state.soxx["netChange"])}>
+                {this.state.soxx["netChange"]}
+              </span>
             </h5>
             <h5>
-              <span style={changeFontColor(this.state.soxx["pctChange"])}>{this.state.soxx["pctChange"] + "%"}</span>
+              <span style={changeFontColor(this.state.soxx["pctChange"])}>
+                {this.state.soxx["pctChange"] + "%"}
+              </span>
             </h5>
           </div>
           <div className="main-index-box">
             <h6>iShares Expanded Tech-Software Sector ETF</h6>
             <h2>{this.state.igv["last"]}</h2>
             <h5>
-              <span style={changeFontColor(this.state.igv["netChange"])}>{this.state.igv["netChange"]}</span>
+              <span style={changeFontColor(this.state.igv["netChange"])}>
+                {this.state.igv["netChange"]}
+              </span>
             </h5>
             <h5>
-              <span style={changeFontColor(this.state.igv["pctChange"])}>{this.state.igv["pctChange"] + "%"}</span>
+              <span style={changeFontColor(this.state.igv["pctChange"])}>
+                {this.state.igv["pctChange"] + "%"}
+              </span>
             </h5>
           </div>
         </div>
@@ -269,13 +284,23 @@ class Chart extends React.Component {
               <div className="dashboard-chart-main">
                 <h1>{this.state.compact["last"]}</h1>
                 <h5>
-                  <span style={changeFontColor(netChange)}>{this.state.compact["netChange"]}</span>
+                  <span style={changeFontColor(netChange)}>
+                    {this.state.compact["netChange"]}
+                  </span>
                 </h5>
                 <h5>
-                  <span style={changeFontColor(changePercent)}>{this.state.compact["pctChange"] + "%"}</span>
+                  <span style={changeFontColor(changePercent)}>
+                    {this.state.compact["pctChange"] + "%"}
+                  </span>
                 </h5>
                 <h6>
-                  <span>As at {new Date(this.state.compact["lastPriceTime"] + 28800000).toTimeString()}.</span>
+                  <span>
+                    As at{" "}
+                    {new Date(
+                      this.state.compact["lastPriceTime"] + 28800000,
+                    ).toTimeString()}
+                    .
+                  </span>
                 </h6>
               </div>
             </div>
@@ -305,7 +330,9 @@ class Chart extends React.Component {
               <div className="dashboard-info">
                 <h6>YTD change %</h6>
                 <h5>
-                  <span style={changeFontColor(ytdChange)}>{this.state.compact["pctChangeYTD"] + "%"}</span>
+                  <span style={changeFontColor(ytdChange)}>
+                    {this.state.compact["pctChangeYTD"] + "%"}
+                  </span>
                 </h5>
               </div>
             </div>
@@ -313,7 +340,11 @@ class Chart extends React.Component {
               <FormGroup>
                 <div className="select-index">
                   <h6>Index</h6>
-                  <Input type="select" value={this.state.index} onChange={this.changeIndex}>
+                  <Input
+                    type="select"
+                    value={this.state.index}
+                    onChange={this.changeIndex}
+                  >
                     <optgroup label="-- Main Indices --">
                       <option value="ndx">NASDAQ 100</option>
                       <option value="ccmp">NASDAQ Composite</option>
@@ -326,7 +357,9 @@ class Chart extends React.Component {
                       <option value="nbi">NASDAQ BioTech Index</option>
                       <option value="cutl">NASDAQ Telecom Index</option>
                       <option value="ndf">NASDAQ Financial Index</option>
-                      <option value="tran">Dow Jones Transportation Average</option>
+                      <option value="tran">
+                        Dow Jones Transportation Average
+                      </option>
                       <option value="util">Dow Jones Utility Average</option>
                       <option value="mid">S&P 400 Mid Cap Index</option>
                       <option value="sml">S&P 600 Small Cap Index</option>
@@ -338,7 +371,11 @@ class Chart extends React.Component {
 
                 <div className="select-interval">
                   <h6>Interval</h6>
-                  <Input type="select" value={this.state.interval} onChange={this.changeInterval}>
+                  <Input
+                    type="select"
+                    value={this.state.interval}
+                    onChange={this.changeInterval}
+                  >
                     <option value="d1">1D</option>
                     <option value="d3">3D</option>
                     <option value="m1">1M</option>

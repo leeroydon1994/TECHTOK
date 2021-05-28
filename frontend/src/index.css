@@ -1,7 +1,8 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
-    "Droid Sans", "Helvetica Neue", "Source Sans Pro", sans-serif !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    "Source Sans Pro", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: white;
@@ -25,13 +26,13 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 /* stock charts */
 .stock-table {
   width: 100%;
-  /* max-width: 1600px; */
 }
 
 .stock-table > thead {
@@ -67,21 +68,7 @@ code {
   text-align: center;
 }
 
-/* Footer
-.footer {
-  color: #0f0f0f;
-  margin-top: 8rem;
-  margin-bottom: 2rem;
-  width: 100%;
-  text-align: center;
-}
-
-.footer p {
-  font-size: 12px;
-} */
-
 td,
 th {
   vertical-align: middle !important;
-  /* padding: 0.5rem !important; */
 }

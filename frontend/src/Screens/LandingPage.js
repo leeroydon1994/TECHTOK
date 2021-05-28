@@ -1,9 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import NavBar from "../Component/Navbar/Navbar";
 import { connect } from "react-redux";
 
-// import HomePage from "./HomePage";
 import DashboardPage from "./DashboardPage";
 import Nasdaq100Page from "./Nasdaq100Page";
 import RatingsPage from "./RatingsPage";
@@ -13,12 +17,9 @@ import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
 import BlogPage from "./BlogPage";
 import NewsPage from "./NewsPage";
-// import Footer from "../Component/Navbar/NavbarFooter";
 
 export default class LandingPage extends React.Component {
   render() {
-    // const array = ["Apples", "Bananas", "Carrots"];
-
     const PurePrivateRoute = ({ component, isAuthenticated, ...rest }) => {
       const Component = component;
       if (Component != null) {
@@ -52,7 +53,6 @@ export default class LandingPage extends React.Component {
         <Router>
           <NavBar isAuthenticated={this.props.isAuthenticated} />
           <Switch>
-            {/* <PrivateRoute exact path="/" component={HomePage} /> */}
             <PrivateRoute exact path="/" component={DashboardPage} />
             <PrivateRoute exact path="/nasdaq100" component={Nasdaq100Page} />
             <PrivateRoute exact path="/ratings" component={RatingsPage} />
@@ -65,23 +65,7 @@ export default class LandingPage extends React.Component {
             <Route exact path="/signup" component={SignUpPage} />
           </Switch>
         </Router>
-        {/* <div
-          className="footer13"
-          style={{ position: "relative", top: 1700, left: 800 }}
-        >
-          <Footer />
-        </div> */}
       </div>
     );
   }
 }
-
-/*
-
-  <Link to="/">Home</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/currency-converter">Currency Converter</Link>
-      <Link to="/timer">Timer </Link>
-      <Link to="/clock">Clock</Link>
-
-*/

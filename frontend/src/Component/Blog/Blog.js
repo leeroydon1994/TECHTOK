@@ -45,11 +45,9 @@ export class AddButton extends React.Component {
   componentDidUpdate(previousProps) {
     // this.props.blogs
     if (previousProps.blogs !== this.props.blogs) {
-      console.log("ruuning");
       const array1 = this.props.blogs.map((blog, i) => {
         return blog.id;
       });
-      console.log(array1);
 
       const reducer = (object, currentValue) => {
         object[currentValue] = false;
@@ -57,7 +55,6 @@ export class AddButton extends React.Component {
       };
       const object1 = array1.reduce(reducer, {});
       const object2 = { ...object1, ...this.state.show };
-      console.log(object2);
       this.setState({ ...this.state, show: object2 });
     }
     // from reducer + mapStateToProps
@@ -67,7 +64,6 @@ export class AddButton extends React.Component {
       // && this.props.done === "edit done"
     ) {
       this.props.listBlogConnect();
-      console.log(this.state.show);
 
       let allFalseobj = { ...this.state.show };
       let array1 = Object.keys(allFalseobj);
@@ -79,14 +75,10 @@ export class AddButton extends React.Component {
   }
 
   deleteblog = (blogId) => {
-    console.log("im here");
-    // console.log(this.props.blogs);
     this.props.deleteBlogConnect(blogId);
-    // console.log(blogId);
   };
 
   searchBlog(input) {
-    console.log(this.props.blogs);
     this.props.searchBlogConnect(input);
   }
 
@@ -122,10 +114,11 @@ export class AddButton extends React.Component {
               <h1>Your Blog</h1>
             </div>
 
-            {/* <label className="bloglabeltext1">Title:</label> */}
             <h3 className="blogsearchtext1">
               {" "}
-              {!this.state.searchbarInput ? "Content" : `Search result for ${this.state.searchbarInput}`}
+              {!this.state.searchbarInput
+                ? "Content"
+                : `Search result for ${this.state.searchbarInput}`}
             </h3>
             <br />
             <div>
@@ -136,8 +129,6 @@ export class AddButton extends React.Component {
                 value={this.state.headline}
                 placeholder="Headline"
               />
-              <br />
-              {/* <label className="bloglabeltext2">Content:</label> */}
               <br />
               <Input
                 className="contentinput"
@@ -151,7 +142,13 @@ export class AddButton extends React.Component {
             </div>
             <br />
             <div>
-              <Button className="blogsubbut" color="primary" onClick={this.addBlog} size="medium" variant="contained">
+              <Button
+                className="blogsubbut"
+                color="primary"
+                onClick={this.addBlog}
+                size="medium"
+                variant="contained"
+              >
                 POST
               </Button>
             </div>
@@ -163,7 +160,11 @@ export class AddButton extends React.Component {
             {this.props.blogs
               ? this.props.blogs.map((blog, i) => {
                   return (
-                    <div key={i} id={blog.id} className="p-3 my-2 rounded bg-docs-transparent-grid">
+                    <div
+                      key={i}
+                      id={blog.id}
+                      className="p-3 my-2 rounded bg-docs-transparent-grid"
+                    >
                       <Toast>
                         <ToastHeader>
                           <div className="blogheadline">
@@ -250,7 +251,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addBlogConnect: (blog) => {
-      console.log(blog);
       dispatch(AddBlogActionThunk(blog));
     },
     deleteBlogConnect: (blogId) => {
@@ -259,9 +259,6 @@ const mapDispatchToProps = (dispatch) => {
     listBlogConnect: () => {
       dispatch(ListBlogsActionThunk());
     },
-    // editblogConnect: (blogId) => {
-    //   dispatch(EditBlogActionThunk(blogId));
-    // },
     searchBlogConnect: (input) => {
       dispatch(SearchBlogsActionThunk(input));
     },

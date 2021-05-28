@@ -57,8 +57,6 @@ export function ListBlogsActionThunk() {
         headers: { Authorization: `Bearer ${user}` },
       })
       .then((res) => {
-        // console.log("wowowowoww");
-        // console.log(res);
         dispatch(ListBlogsAction(res.data));
       });
   };
@@ -72,8 +70,6 @@ export function SearchBlogsActionThunk(input) {
         headers: { Authorization: `Bearer ${user}` },
       })
       .then((res) => {
-        // console.log("wowowowoww");
-        // console.log(res);
         let filteredArray = res.data.filter(
           (blog) =>
             blog["headline"].toLowerCase().indexOf(input.toLowerCase()) > -1 ||
@@ -90,13 +86,11 @@ export function SearchBlogsActionThunk(input) {
 
 export function AddBlogActionThunk(blog) {
   return (dispatch) => {
-    console.log(blog, "in redux");
     axios
       .post(`${process.env.REACT_APP_API_SERVER}/api/blog/`, blog, {
         headers: { Authorization: `Bearer ${user}` },
       })
       .then((res) => {
-        console.log(res);
         dispatch(AddBlogAction(res.data));
       });
   };
@@ -106,13 +100,11 @@ export function AddBlogActionThunk(blog) {
 
 export function EditBlogActionThunk(blogId, blog) {
   return (dispatch) => {
-    console.log(blogId, blog, " edit in reduxxxxxx");
     axios
       .put(`${process.env.REACT_APP_API_SERVER}/api/blog/${blogId}`, blog, {
         headers: { Authorization: `Bearer ${user}` },
       })
       .then((res) => {
-        console.log(res);
         dispatch(EditBlogAction(res.data));
       });
   };
@@ -122,7 +114,6 @@ export function EditBlogActionThunk(blogId, blog) {
 
 export function DeleteBlogActionThunk(blogId) {
   return (dispatch) => {
-    console.log(blogId, "del in reduxxxxx");
     axios
       .delete(`${process.env.REACT_APP_API_SERVER}/api/blog/${blogId}`, {
         headers: { Authorization: `Bearer ${user}` },

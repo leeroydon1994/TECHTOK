@@ -7,12 +7,6 @@ import * as MdIcons from "react-icons/md";
 import * as HiIcons from "react-icons/hi";
 
 export const LoginSidebarData = [
-  // {
-  //   title: "Home",
-  //   path: "/",
-  //   icon: <AiIcons.AiFillHome />,
-  //   cName: "nav-text",
-  // },
   {
     title: "Dashboard",
     path: "/",

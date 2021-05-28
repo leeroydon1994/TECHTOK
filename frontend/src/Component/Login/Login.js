@@ -27,11 +27,7 @@ export class PureLogin extends React.Component {
     });
   };
   login = () => {
-    console.log("LOGIN");
     this.props.loginRedux(this.state.email, this.state.password);
-
-    // if (this.props.isAuthenticated) {
-    // }
   };
 
   componentClick() {
@@ -57,12 +53,13 @@ export class PureLogin extends React.Component {
             <div className="login-text-box">
               <h1>TECHTOK</h1>
               <p className="Intro">
-                Start thinking and researching stocks. <span>Simply Technically.</span>
+                Start thinking and researching stocks.{" "}
+                <span>Simply Technically.</span>
               </p>
 
               <p>
-                "Whatever happens in the stock market <em>today</em> has happened <em>before</em> and will happen{" "}
-                <em>again</em>
+                "Whatever happens in the stock market <em>today</em> has
+                happened <em>before</em> and will happen <em>again</em>
                 .”
               </p>
               <cite>- Jesse Livermore</cite>
@@ -157,4 +154,6 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PureLogin));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PureLogin),
+);

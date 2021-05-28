@@ -29,8 +29,6 @@
   border: 3px solid rgb(255, 255, 255);
 }
 
-/* ----- */
-
 .dashboard-wrapper {
   max-width: 100rem;
   margin: 0 auto 5rem auto;
@@ -95,11 +93,6 @@
   width: 100%;
 }
 
-/* .dashboard-active-stocks,
-.dashboard-laggard-stocks,
-.dashboard-leader-stocks {
-} */
-
 .dashboard-wrapper .stock-info-head h1 {
   margin-bottom: 1rem;
 }
@@ -121,9 +114,6 @@
 .dashboard-index-quote > h5 {
   margin: 0rem 10px 0 10px;
 }
-/* .dashboard-flex h5 {
-  margin: 0.25rem 10px;
-} */
 
 .main-index-container {
   display: flex;

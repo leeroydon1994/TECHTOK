@@ -18,30 +18,28 @@ function loginFailureActionCreator(message) {
 
 export function loginUserThunk(email, password) {
   return (dispatch) => {
-    console.log("REDUX IN PROGRESS");
     return axios
       .post(`${process.env.REACT_APP_API_SERVER}/api/login`, {
         email: email,
         password: password,
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data == null) {
-          console.log("failed login 29");
           dispatch(loginFailureActionCreator("Unknown Error, no Response.."));
         } else if (!response.data.token) {
-          console.log("failed login 32");
-          dispatch(loginFailureActionCreator(response.data.message || "No Token generated"));
+          dispatch(
+            loginFailureActionCreator(
+              response.data.message || "No Token generated",
+            ),
+          );
         } else {
-          console.log("successful login");
-
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("userName", response.data.userName);
 
           dispatch(loginSuccessActionCreator());
         }
       })
-      .catch((err) => console.log("Error: " + err));
+      .catch((err) => console.error("Error: " + err));
   };
 }
 
@@ -88,6 +86,6 @@ export function loginFacebookThunk(userInfo) {
           dispatch(loginSuccessActionCreator());
         }
       })
-      .catch((err) => console.log("Error: ", err));
+      .catch((err) => console.error("Error: ", err));
   };
 }

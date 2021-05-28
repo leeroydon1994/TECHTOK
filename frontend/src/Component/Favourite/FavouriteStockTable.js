@@ -29,7 +29,6 @@ export default class FavouriteStockTable extends React.Component {
   // Tags
   getTagData(stock) {
     let symbol = stock.symbol;
-    console.log(symbol);
 
     // Share with the fave GET route
     axios
@@ -37,22 +36,21 @@ export default class FavouriteStockTable extends React.Component {
         headers: { Authorization: `Bearer ${this.user}` },
       })
       .then((res) => {
-        console.log(res.data, "TAG GET!");
         for (let color of this.tagsArray) {
-          console.log(this.tagsArray.indexOf(color) + 1);
-          if (res.data.some((row) => row.symbol === symbol && row.tag_id === this.tagsArray.indexOf(color) + 1)) {
-            console.log(`Change ${color} tags for ${symbol} !`);
+          if (
+            res.data.some(
+              (row) =>
+                row.symbol === symbol &&
+                row.tag_id === this.tagsArray.indexOf(color) + 1,
+            )
+          ) {
             this.props.addTag(symbol, color);
-          } else {
-            console.log("Not to change the tags for " + symbol + "!");
           }
         }
       });
   }
 
   addTagData(stock, color) {
-    console.log(stock, color);
-
     axios
       .put(
         `${process.env.REACT_APP_API_SERVER}/api/tags/stock/${stock}`,
@@ -62,28 +60,24 @@ export default class FavouriteStockTable extends React.Component {
         },
       )
       .then((res) => {
-        console.log(res.data);
         this.props.addTag(stock, color);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 
   deleteTagData(stock, color) {
-    console.log(stock, color);
-
     axios
       .delete(`${process.env.REACT_APP_API_SERVER}/api/tags/stock/${stock}`, {
         data: { tag: color },
         headers: { Authorization: `Bearer ${this.user}` },
       })
       .then((res) => {
-        console.log(res.data);
         this.props.deleteTag(stock, color);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 
@@ -110,7 +104,11 @@ export default class FavouriteStockTable extends React.Component {
           </Button>
         </td>
 
-        <FavouriteTags stockName={stock["symbol"]} addTag={this.addTagData} deleteTag={this.deleteTagData} />
+        <FavouriteTags
+          stockName={stock["symbol"]}
+          addTag={this.addTagData}
+          deleteTag={this.deleteTagData}
+        />
       </tr>
     ));
   }

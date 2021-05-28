@@ -24,7 +24,8 @@ export default class StockAPI extends React.Component {
   }
 
   callStockAPI() {
-    const api = "https://bloomberg-market-and-financial-news.p.rapidapi.com/market/get-movers?id=ndx%3Aind";
+    const api =
+      "https://bloomberg-market-and-financial-news.p.rapidapi.com/market/get-movers?id=ndx%3Aind";
 
     fetch(api, {
       method: "GET",
@@ -37,7 +38,6 @@ export default class StockAPI extends React.Component {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         this.setState({
           activeStocks: data["active"],
           laggardStocks: data["laggards"],
@@ -45,7 +45,7 @@ export default class StockAPI extends React.Component {
         });
       })
       .catch((err) => {
-        console.error(err);
+        throw new Error(err);
       });
   }
 
@@ -88,7 +88,7 @@ export default class StockAPI extends React.Component {
           </div>
         </div>
 
-        <div className="button stock-refresh-button">{/* <Button onClick={this.callStockAPI}>Refresh</Button> */}</div>
+        <div className="button stock-refresh-button"></div>
       </>
     );
   }

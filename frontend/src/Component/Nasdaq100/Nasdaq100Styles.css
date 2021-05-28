@@ -10,49 +10,20 @@
   background-color: rgb(240, 240, 247);
 }
 
-/* .stock-table {
-  width: 100%;
-  max-width: 1600px;
-}
-
-.stock-table > thead {
-  text-align: left;
-}
-
-.head {
-  font-weight: 800;
-  padding: 5px 15px;
-  text-align: left;
-}
-
-.head1 {
-  width: 300px;
-  padding: 15px;
-  text-align: left;
-} */
-
 .nasdaq100-headline1 {
-  /* position: relative;
-  top: 50px;
-  right: 10px; */
   font-weight: 800;
   margin: 3rem 0;
 }
 
 .nasdaq100-stocks-list {
-  /* position: relative;
-  top: 100px;
-  right: 170px; */
   width: 100%;
   padding: 1.5rem 0;
 }
 
 .Nasdaq100-stock-info-head {
-  /* position: relative; */
   font-weight: 500;
   font-size: 1.2rem;
   padding: 10px;
-  /* left: 5px; */
 }
 
 .Nasdaq100-stock-info {

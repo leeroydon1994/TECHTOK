@@ -14,12 +14,9 @@ class Modal extends React.Component {
   }
 
   componentDidMount() {
-    console.log("running2");
-    console.log(this.props.blogs);
-
-    console.log(this.props.blogs);
-    console.log(this.props.something);
-    const singleBlogArray = this.props.blogs.filter((blog) => blog.id === this.props.something);
+    const singleBlogArray = this.props.blogs.filter(
+      (blog) => blog.id === this.props.something,
+    );
     const signleBlog = singleBlogArray[0];
     this.setState({
       headline: signleBlog.headline,
@@ -39,13 +36,10 @@ class Modal extends React.Component {
   };
 
   editblog = (blogId, blog) => {
-    console.log("im editing");
-    console.log(blogId, blog);
     this.props.editBlogConnect(blogId, blog);
   };
 
   onClose = (blogId) => {
-    // console.log(this.props.something);
     this.props.onClose && this.props.onClose(blogId);
   };
 
@@ -58,11 +52,17 @@ class Modal extends React.Component {
         <div className="p-3 my-2 rounded bg-docs-transparent-grid">
           <div className="modal-content">
             <label>Headline</label>
-            <textarea value={this.state.headline} onChange={this.onHeadlineChange}></textarea>
+            <textarea
+              value={this.state.headline}
+              onChange={this.onHeadlineChange}
+            ></textarea>
           </div>
           <div className="modal-content">
             <label>Content</label>
-            <textarea value={this.state.content} onChange={this.onContentChange}></textarea>
+            <textarea
+              value={this.state.content}
+              onChange={this.onContentChange}
+            ></textarea>
           </div>
         </div>
 

@@ -20,20 +20,14 @@ const authClass = require("../auth")(knex);
 app.use(authClass.initialize());
 
 exports.postLogin = async function (req, res) {
-  console.log("logging in");
-  console.log(req.body.email);
-
   // FROM A REAL DATABASE
   if (req.body.email && req.body.password) {
     let email = req.body.email;
     let password = req.body.password;
     let query = await knex.select("*").from("users").where("email", email);
 
-    console.log(query, "QUERY");
-
     if (query) {
       let result = await bcrypt.checkPassword(password, query[0].password);
-      console.log(result);
 
       if (result === true) {
         let payload = {
@@ -41,21 +35,20 @@ exports.postLogin = async function (req, res) {
           name: query[0].name,
         };
         let token = jwt.sign(payload, config.jwtSecret);
-        console.log(token);
         res.json({
           token: token,
           userName: query[0].name,
         });
       } else {
-        console.log("Incorrect password.");
+        console.error("Incorrect password.");
         res.sendStatus(401);
       }
     } else {
-      console.log("No such user.");
+      console.error("No such user.");
       res.sendStatus(401);
     }
   } else {
-    console.log("No input!");
+    console.error("No input!");
     res.sendStatus(401);
   }
 };
@@ -114,7 +107,7 @@ exports.postFBLogin = function async(req, res) {
         }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         res.sendStatus(401);
       });
   } else {
@@ -127,10 +120,8 @@ exports.postFBLogin = function async(req, res) {
 exports.postSignUp = async function (req, res) {
   if (req.body) {
     let { name, password, email } = req.body;
-    console.log(req.body);
 
     let hash = await bcrypt.hashPassword(password);
-    console.log(hash);
 
     let query = await knex
       .select("email")
@@ -146,7 +137,7 @@ exports.postSignUp = async function (req, res) {
             })
             .returning("id");
         } else {
-          return console.log("fail");
+          return console.error("fail");
         }
       });
 

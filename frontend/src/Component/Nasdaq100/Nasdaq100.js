@@ -49,7 +49,6 @@ class StockAPI extends React.Component {
       );
 
       let stockResult = [].concat(data[0], data[1], data[2]).flat(1);
-      console.log(stockResult);
 
       // Unify the "longName" key in each object to "name", in order to fit the syntax of database queryings
       const mappedStockResult = stockResult.map((item) => {
@@ -57,12 +56,11 @@ class StockAPI extends React.Component {
         obj["name"] = item["longName"];
         return obj;
       });
-      console.log(mappedStockResult);
       this.setState({
         nasdaqStocks: mappedStockResult,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -84,7 +82,9 @@ class StockAPI extends React.Component {
           </div>
         </div>
 
-        <div className="button stock-refresh-button">{/* <Button onClick={this.callStockAPI}>Refresh</Button> */}</div>
+        <div className="button stock-refresh-button">
+          {/* <Button onClick={this.callStockAPI}>Refresh</Button> */}
+        </div>
       </div>
     );
   }
